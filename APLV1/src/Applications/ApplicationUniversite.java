@@ -8,7 +8,7 @@ import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.NamingContext;
 
 import pRectorat.Universite;
-import ClientsServeurs.ClientUniversiteMinistere;
+import ClientsServeurs.ClientGestionVoeuxMinistere;
 import ClientsServeurs.ServeurUniversite;
 
 public class ApplicationUniversite {
@@ -50,7 +50,7 @@ public class ApplicationUniversite {
 			System.out.println("Sous quel nom voulez-vous enregistrer l'objet Corba Client ?");
 			String nomOb = "Client_PS_Gestion";
 			System.out.println("lancement du client Université");
-			ClientUniversiteMinistere cu = new ClientUniversiteMinistere(orb, nameRoot, nomOb, idObj);
+			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomOb, idObj);
 			Thread tcli = new Thread(cu);
 			tcli.start();
 

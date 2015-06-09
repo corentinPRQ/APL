@@ -86,7 +86,7 @@ public class ClientUniversiteGV implements Runnable{
 
 			// Construction du nom a enregistrer
 			String nomObj = "Midi-Pyrenees_GVC";
-			ClientUniversiteMinistere cu = new ClientUniversiteMinistere(orb, nameRoot, nomObj, idObj);
+			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomObj, idObj);
 			cu.travailler();
 			
 		} catch (InvalidName e) {

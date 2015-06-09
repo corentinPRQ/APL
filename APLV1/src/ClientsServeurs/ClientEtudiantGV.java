@@ -88,6 +88,9 @@ public class ClientEtudiantGV implements Runnable{
 		monGestionVoeu.consulterListeVoeu(etu);
 	}
 	
+	public void getListeAccreditation(Etudiant etu){
+		monGestionVoeu.getListeAccreditations();
+	}
 	
 	public static void main(String args[]) {
 		try {
@@ -103,7 +106,7 @@ public class ClientEtudiantGV implements Runnable{
 
 			// Construction du nom a enregistrer
 			String nomObj = "Midi-Pyrenees_GVC";
-			ClientUniversiteMinistere cu = new ClientUniversiteMinistere(orb, nameRoot, nomObj, idObj);
+			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomObj, idObj);
 			cu.travailler();
 			
 		} catch (InvalidName e) {

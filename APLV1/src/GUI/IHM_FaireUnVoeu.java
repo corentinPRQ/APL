@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 import utilitaires.utils;
-import ClientsServeurs.ClientEtudiantGV;
 
 /**
  *
@@ -46,11 +45,8 @@ public class IHM_FaireUnVoeu extends javax.swing.JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(params != null){
-	    	String periode_en_cours = params.getProperty("periode");
-	    	System.out.println(periode_en_cours);
-		}
-
+    	String periode_en_cours = params.getProperty("periode");
+    	System.out.println(periode_en_cours);
     	
         jLabel1 = new javax.swing.JLabel();
         lb_diplome = new javax.swing.JLabel();
