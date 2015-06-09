@@ -100,7 +100,7 @@ public class AccredHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/Accred:1.0";
+    private final static String _id = "IDL:pRectorat/Accred:1.0";
 
     /**
      * Read Accred from a marshalled stream

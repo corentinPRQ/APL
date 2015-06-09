@@ -100,7 +100,7 @@ public class DiplomeHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/Diplome:1.0";
+    private final static String _id = "IDL:pRectorat/Diplome:1.0";
 
     /**
      * Read Diplome from a marshalled stream

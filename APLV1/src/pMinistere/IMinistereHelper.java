@@ -60,7 +60,7 @@ public class IMinistereHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Ministere/IMinistere:1.0";
+    private final static String _id = "IDL:pMinistere/IMinistere:1.0";
 
     /**
      * Read IMinistere from a marshalled stream

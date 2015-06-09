@@ -97,7 +97,7 @@ public class universitaireNonTrouveHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Universite/universitaireNonTrouve:1.0";
+    private final static String _id = "IDL:pUniversite/universitaireNonTrouve:1.0";
 
     /**
      * Read universitaireNonTrouve from a marshalled stream

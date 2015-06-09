@@ -80,7 +80,7 @@ public class listeComplementaireHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Universite/listeComplementaire:1.0";
+    private final static String _id = "IDL:pUniversite/listeComplementaire:1.0";
 
     /**
      * Read listeComplementaire from a marshalled stream

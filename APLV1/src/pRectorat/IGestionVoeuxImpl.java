@@ -34,7 +34,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	 */
 	@Override
 	public Voeu[] getVoeux() {
-		//tada
+		//
 		Collection<Voeu[]> colV = this.listeVoeux.values();
 		int taille = colV.size();
 		//on crée un tableau de voeux en fonction de la taille max potentielle
@@ -66,7 +66,6 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	public void repondreVoeu(DecisionEtudiant pDecision, Voeu v)
 			throws VoeuNonTrouve {
 		v.decEtudiant=pDecision;
-		
 	}
 
 	
@@ -143,7 +142,8 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	 */
 	@Override
 	public void faireVoeu(Voeu v) throws VoeuNonTrouve, EtudiantNonTrouve {
-		Rectorat r = new Rectorat();  //TODO lancer l'application gestVoeu avec un id de rectorat et voir comment le récupérer
+		Rectorat r = new Rectorat(); 
+		//TODO lancer l'application gestVoeu avec un id de rectorat et voir comment le récupérer
 		if(v.idR==r){
 			this.enregistrerVoeu(v);
 		}else{

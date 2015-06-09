@@ -80,7 +80,7 @@ public class listePrincipaleHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Universite/listePrincipale:1.0";
+    private final static String _id = "IDL:pUniversite/listePrincipale:1.0";
 
     /**
      * Read listePrincipale from a marshalled stream

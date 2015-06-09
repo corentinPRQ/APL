@@ -80,7 +80,7 @@ public class TabAccredHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/TabAccred:1.0";
+    private final static String _id = "IDL:pRectorat/TabAccred:1.0";
 
     /**
      * Read TabAccred from a marshalled stream

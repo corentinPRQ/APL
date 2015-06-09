@@ -1,8 +1,8 @@
-import ::Rectorat::Diplome;
+import ::pRectorat::Diplome;
 
-module Ministere{
+module pMinistere{
 
-	typedef sequence<::Rectorat::Diplome> Referenciel;
+	typedef sequence<::pRectorat::Diplome> Referenciel;
 
 	interface IMinistere{
 		readonly attribute Referenciel getReferenciel;

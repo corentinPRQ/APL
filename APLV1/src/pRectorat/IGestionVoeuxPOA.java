@@ -28,43 +28,30 @@ public abstract class IGestionVoeuxPOA extends org.omg.PortableServer.Servant
         return _ids_list;
     }
 
-    private static final java.util.Map operationMap = new java.util.HashMap();
-
-    static {
-            operationMap.put("_get_getCatalogueUniversite",
-                    new Operation__get_getCatalogueUniversite());
-            operationMap.put("_get_getListeAccreditations",
-                    new Operation__get_getListeAccreditations());
-            operationMap.put("_get_getVoeux",
-                    new Operation__get_getVoeux());
-            operationMap.put("changerPeriode",
-                    new Operation_changerPeriode());
-            operationMap.put("consulterListeVoeu",
-                    new Operation_consulterListeVoeu());
-            operationMap.put("faireVoeu",
-                    new Operation_faireVoeu());
-            operationMap.put("relayerVoeu",
-                    new Operation_relayerVoeu());
-            operationMap.put("repondreVoeu",
-                    new Operation_repondreVoeu());
-            operationMap.put("setEtatVoeu",
-                    new Operation_setEtatVoeu());
-            operationMap.put("validerVoeu",
-                    new Operation_validerVoeu());
-    }
-
     public final org.omg.CORBA.portable.OutputStream _invoke(final String opName,
             final org.omg.CORBA.portable.InputStream _is,
             final org.omg.CORBA.portable.ResponseHandler handler)
     {
 
-        final AbstractOperation operation = (AbstractOperation)operationMap.get(opName);
-
-        if (null == operation) {
+        if (opName.equals("_get_getCatalogueUniversite")) {
+                return _invoke__get_getCatalogueUniversite(_is, handler);
+        } else if (opName.equals("_get_getListeAccreditations")) {
+                return _invoke__get_getListeAccreditations(_is, handler);
+        } else if (opName.equals("_get_getVoeux")) {
+                return _invoke__get_getVoeux(_is, handler);
+        } else if (opName.equals("changerPeriode")) {
+                return _invoke_changerPeriode(_is, handler);
+        } else if (opName.equals("consulterListeVoeu")) {
+                return _invoke_consulterListeVoeu(_is, handler);
+        } else if (opName.equals("faireVoeu")) {
+                return _invoke_faireVoeu(_is, handler);
+        } else if (opName.equals("repondreVoeu")) {
+                return _invoke_repondreVoeu(_is, handler);
+        } else if (opName.equals("setEtatVoeu")) {
+                return _invoke_setEtatVoeu(_is, handler);
+        } else {
             throw new org.omg.CORBA.BAD_OPERATION(opName);
         }
-
-        return operation.invoke(this, _is, handler);
     }
 
     // helper methods
@@ -174,48 +161,6 @@ public abstract class IGestionVoeuxPOA extends org.omg.PortableServer.Servant
         return _output;
     }
 
-    private org.omg.CORBA.portable.OutputStream _invoke_validerVoeu(
-            final org.omg.CORBA.portable.InputStream _is,
-            final org.omg.CORBA.portable.ResponseHandler handler) {
-        org.omg.CORBA.portable.OutputStream _output;
-        pRectorat.Voeu arg0_in = pRectorat.VoeuHelper.read(_is);
-
-        try
-        {
-            validerVoeu(arg0_in);
-
-            _output = handler.createReply();
-
-        }
-        catch (pRectorat.VoeuNonTrouve _exception)
-        {
-            _output = handler.createExceptionReply();
-            pRectorat.VoeuNonTrouveHelper.write(_output,_exception);
-        }
-        return _output;
-    }
-
-    private org.omg.CORBA.portable.OutputStream _invoke_relayerVoeu(
-            final org.omg.CORBA.portable.InputStream _is,
-            final org.omg.CORBA.portable.ResponseHandler handler) {
-        org.omg.CORBA.portable.OutputStream _output;
-        pRectorat.Voeu arg0_in = pRectorat.VoeuHelper.read(_is);
-
-        try
-        {
-            relayerVoeu(arg0_in);
-
-            _output = handler.createReply();
-
-        }
-        catch (pRectorat.VoeuNonTrouve _exception)
-        {
-            _output = handler.createExceptionReply();
-            pRectorat.VoeuNonTrouveHelper.write(_output,_exception);
-        }
-        return _output;
-    }
-
     private org.omg.CORBA.portable.OutputStream _invoke_changerPeriode(
             final org.omg.CORBA.portable.InputStream _is,
             final org.omg.CORBA.portable.ResponseHandler handler) {
@@ -227,114 +172,6 @@ public abstract class IGestionVoeuxPOA extends org.omg.PortableServer.Servant
         _output = handler.createReply();
 
         return _output;
-    }
-
-    // operation classes
-    private abstract static class AbstractOperation {
-        protected abstract org.omg.CORBA.portable.OutputStream invoke(
-                IGestionVoeuxPOA target,
-                org.omg.CORBA.portable.InputStream _is,
-                org.omg.CORBA.portable.ResponseHandler handler);
-    }
-
-    private static final class Operation__get_getCatalogueUniversite extends AbstractOperation
-    {
-        protected org.omg.CORBA.portable.OutputStream invoke(
-                final IGestionVoeuxPOA target,
-                final org.omg.CORBA.portable.InputStream _is,
-                final org.omg.CORBA.portable.ResponseHandler handler) {
-            return target._invoke__get_getCatalogueUniversite(_is, handler);
-        }
-    }
-
-    private static final class Operation__get_getListeAccreditations extends AbstractOperation
-    {
-        protected org.omg.CORBA.portable.OutputStream invoke(
-                final IGestionVoeuxPOA target,
-                final org.omg.CORBA.portable.InputStream _is,
-                final org.omg.CORBA.portable.ResponseHandler handler) {
-            return target._invoke__get_getListeAccreditations(_is, handler);
-        }
-    }
-
-    private static final class Operation__get_getVoeux extends AbstractOperation
-    {
-        protected org.omg.CORBA.portable.OutputStream invoke(
-                final IGestionVoeuxPOA target,
-                final org.omg.CORBA.portable.InputStream _is,
-                final org.omg.CORBA.portable.ResponseHandler handler) {
-            return target._invoke__get_getVoeux(_is, handler);
-        }
-    }
-
-    private static final class Operation_consulterListeVoeu extends AbstractOperation
-    {
-        protected org.omg.CORBA.portable.OutputStream invoke(
-                final IGestionVoeuxPOA target,
-                final org.omg.CORBA.portable.InputStream _is,
-                final org.omg.CORBA.portable.ResponseHandler handler) {
-            return target._invoke_consulterListeVoeu(_is, handler);
-        }
-    }
-
-    private static final class Operation_setEtatVoeu extends AbstractOperation
-    {
-        protected org.omg.CORBA.portable.OutputStream invoke(
-                final IGestionVoeuxPOA target,
-                final org.omg.CORBA.portable.InputStream _is,
-                final org.omg.CORBA.portable.ResponseHandler handler) {
-            return target._invoke_setEtatVoeu(_is, handler);
-        }
-    }
-
-    private static final class Operation_faireVoeu extends AbstractOperation
-    {
-        protected org.omg.CORBA.portable.OutputStream invoke(
-                final IGestionVoeuxPOA target,
-                final org.omg.CORBA.portable.InputStream _is,
-                final org.omg.CORBA.portable.ResponseHandler handler) {
-            return target._invoke_faireVoeu(_is, handler);
-        }
-    }
-
-    private static final class Operation_repondreVoeu extends AbstractOperation
-    {
-        protected org.omg.CORBA.portable.OutputStream invoke(
-                final IGestionVoeuxPOA target,
-                final org.omg.CORBA.portable.InputStream _is,
-                final org.omg.CORBA.portable.ResponseHandler handler) {
-            return target._invoke_repondreVoeu(_is, handler);
-        }
-    }
-
-    private static final class Operation_validerVoeu extends AbstractOperation
-    {
-        protected org.omg.CORBA.portable.OutputStream invoke(
-                final IGestionVoeuxPOA target,
-                final org.omg.CORBA.portable.InputStream _is,
-                final org.omg.CORBA.portable.ResponseHandler handler) {
-            return target._invoke_validerVoeu(_is, handler);
-        }
-    }
-
-    private static final class Operation_relayerVoeu extends AbstractOperation
-    {
-        protected org.omg.CORBA.portable.OutputStream invoke(
-                final IGestionVoeuxPOA target,
-                final org.omg.CORBA.portable.InputStream _is,
-                final org.omg.CORBA.portable.ResponseHandler handler) {
-            return target._invoke_relayerVoeu(_is, handler);
-        }
-    }
-
-    private static final class Operation_changerPeriode extends AbstractOperation
-    {
-        protected org.omg.CORBA.portable.OutputStream invoke(
-                final IGestionVoeuxPOA target,
-                final org.omg.CORBA.portable.InputStream _is,
-                final org.omg.CORBA.portable.ResponseHandler handler) {
-            return target._invoke_changerPeriode(_is, handler);
-        }
     }
 
 }

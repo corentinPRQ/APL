@@ -97,7 +97,7 @@ public class VoeuNonTrouveHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/VoeuNonTrouve:1.0";
+    private final static String _id = "IDL:pRectorat/VoeuNonTrouve:1.0";
 
     /**
      * Read VoeuNonTrouve from a marshalled stream

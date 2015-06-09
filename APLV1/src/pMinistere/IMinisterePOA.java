@@ -20,7 +20,7 @@ public abstract class IMinisterePOA extends org.omg.PortableServer.Servant
 
     private static String [] _ids_list =
     {
-        "IDL:Ministere/IMinistere:1.0"
+        "IDL:pMinistere/IMinistere:1.0"
     };
 
     public String[] _all_interfaces(org.omg.PortableServer.POA poa, byte [] objectId)

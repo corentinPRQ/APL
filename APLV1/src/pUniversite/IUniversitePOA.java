@@ -20,7 +20,7 @@ public abstract class IUniversitePOA extends org.omg.PortableServer.Servant
 
     private static String [] _ids_list =
     {
-        "IDL:Universite/IUniversite:1.0"
+        "IDL:pUniversite/IUniversite:1.0"
     };
 
     public String[] _all_interfaces(org.omg.PortableServer.POA poa, byte [] objectId)

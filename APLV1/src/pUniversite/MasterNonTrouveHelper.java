@@ -94,7 +94,7 @@ public class MasterNonTrouveHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Universite/MasterNonTrouve:1.0";
+    private final static String _id = "IDL:pUniversite/MasterNonTrouve:1.0";
 
     /**
      * Read MasterNonTrouve from a marshalled stream

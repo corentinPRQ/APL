@@ -60,7 +60,7 @@ public class IGestionVoeuxHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/IGestionVoeux:1.0";
+    private final static String _id = "IDL:pRectorat/IGestionVoeux:1.0";
 
     /**
      * Read IGestionVoeux from a marshalled stream

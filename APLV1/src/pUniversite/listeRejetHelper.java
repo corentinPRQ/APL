@@ -80,7 +80,7 @@ public class listeRejetHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Universite/listeRejet:1.0";
+    private final static String _id = "IDL:pUniversite/listeRejet:1.0";
 
     /**
      * Read listeRejet from a marshalled stream

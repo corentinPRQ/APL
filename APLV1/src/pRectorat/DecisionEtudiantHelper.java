@@ -62,7 +62,7 @@ public class DecisionEtudiantHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/DecisionEtudiant:1.0";
+    private final static String _id = "IDL:pRectorat/DecisionEtudiant:1.0";
 
     /**
      * Read DecisionEtudiant from a marshalled stream

@@ -97,7 +97,7 @@ public class NoteHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Universite/Note:1.0";
+    private final static String _id = "IDL:pUniversite/Note:1.0";
 
     /**
      * Read Note from a marshalled stream

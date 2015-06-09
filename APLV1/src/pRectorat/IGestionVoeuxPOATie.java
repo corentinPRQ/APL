@@ -121,24 +121,6 @@ public class IGestionVoeuxPOATie extends IGestionVoeuxPOA
     }
 
     /**
-     * Operation validerVoeu
-     */
-    public void validerVoeu(pRectorat.Voeu v)
-        throws pRectorat.VoeuNonTrouve
-    {
-        _tie.validerVoeu( v);
-    }
-
-    /**
-     * Operation relayerVoeu
-     */
-    public void relayerVoeu(pRectorat.Voeu v)
-        throws pRectorat.VoeuNonTrouve
-    {
-        _tie.relayerVoeu( v);
-    }
-
-    /**
      * Operation changerPeriode
      */
     public void changerPeriode(String periode)

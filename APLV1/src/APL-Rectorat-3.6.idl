@@ -3,7 +3,7 @@
 */
 
 
-module Rectorat {
+module pRectorat {
 	/*
 	* Enumeration des differents etats d'un voeu
 	*/
@@ -113,13 +113,7 @@ module Rectorat {
 		void faireVoeu(in Voeu v) raises (VoeuNonTrouve, EtudiantNonTrouve); 
 		
 		//Opération permettant a  letudiant de repondre a  un voeu en emettant sa decision "COMMENT ACCEDER AU VOEU PAR SON ID ? IOR ?"
-		void repondreVoeu(in DecisionEtudiant pDecision, in Voeu v) raises (VoeuNonTrouve); 
-		
-		//Opération permetant dexaminer un voeu
-		void validerVoeu (in Voeu v) raises (VoeuNonTrouve);
-		
-		// Opération permettant a  un rectorat de relayer un voeu dans un autre rectorat "COMMENT ACCEDER A lAUTRE RECTORAT ? ID ? IOR?"
-		void relayerVoeu(in Voeu v) raises (VoeuNonTrouve);		
+		void repondreVoeu(in DecisionEtudiant pDecision, in Voeu v) raises (VoeuNonTrouve); 	
 
 		// Opération permettant au ministere de changer la periode
 		void changerPeriode(in string periode);		

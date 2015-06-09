@@ -60,7 +60,7 @@ public class IUniversiteHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Universite/IUniversite:1.0";
+    private final static String _id = "IDL:pUniversite/IUniversite:1.0";
 
     /**
      * Read IUniversite from a marshalled stream

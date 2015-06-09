@@ -97,7 +97,7 @@ public class EtudiantHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/Etudiant:1.0";
+    private final static String _id = "IDL:pRectorat/Etudiant:1.0";
 
     /**
      * Read Etudiant from a marshalled stream

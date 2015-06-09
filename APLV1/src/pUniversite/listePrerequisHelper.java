@@ -80,7 +80,7 @@ public class listePrerequisHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Universite/listePrerequis:1.0";
+    private final static String _id = "IDL:pUniversite/listePrerequis:1.0";
 
     /**
      * Read listePrerequis from a marshalled stream

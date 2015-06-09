@@ -94,7 +94,7 @@ public class LicenceNonTrouveHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Universite/LicenceNonTrouve:1.0";
+    private final static String _id = "IDL:pUniversite/LicenceNonTrouve:1.0";
 
     /**
      * Read LicenceNonTrouve from a marshalled stream

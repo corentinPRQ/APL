@@ -94,7 +94,7 @@ public class ErreurIdentificationHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/ErreurIdentification:1.0";
+    private final static String _id = "IDL:pRectorat/ErreurIdentification:1.0";
 
     /**
      * Read ErreurIdentification from a marshalled stream

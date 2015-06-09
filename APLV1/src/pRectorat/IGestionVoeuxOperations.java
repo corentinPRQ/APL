@@ -48,18 +48,6 @@ public interface IGestionVoeuxOperations
         throws pRectorat.VoeuNonTrouve;
 
     /**
-     * Operation validerVoeu
-     */
-    public void validerVoeu(pRectorat.Voeu v)
-        throws pRectorat.VoeuNonTrouve;
-
-    /**
-     * Operation relayerVoeu
-     */
-    public void relayerVoeu(pRectorat.Voeu v)
-        throws pRectorat.VoeuNonTrouve;
-
-    /**
      * Operation changerPeriode
      */
     public void changerPeriode(String periode);

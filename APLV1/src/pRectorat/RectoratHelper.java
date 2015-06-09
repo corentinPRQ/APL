@@ -97,7 +97,7 @@ public class RectoratHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/Rectorat:1.0";
+    private final static String _id = "IDL:pRectorat/Rectorat:1.0";
 
     /**
      * Read Rectorat from a marshalled stream

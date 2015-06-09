@@ -80,7 +80,7 @@ public class TabUnivHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/TabUniv:1.0";
+    private final static String _id = "IDL:pRectorat/TabUniv:1.0";
 
     /**
      * Read TabUniv from a marshalled stream

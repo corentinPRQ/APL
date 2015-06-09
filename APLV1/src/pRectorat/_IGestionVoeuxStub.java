@@ -10,7 +10,7 @@ public class _IGestionVoeuxStub extends org.omg.CORBA.portable.ObjectImpl
 {
     static final String[] _ids_list =
     {
-        "IDL:Rectorat/IGestionVoeux:1.0"
+        "IDL:pRectorat/IGestionVoeux:1.0"
     };
 
     public String[] _ids()
@@ -355,118 +355,6 @@ public class _IGestionVoeuxStub extends org.omg.CORBA.portable.ObjectImpl
                 try
                 {
                     _self.repondreVoeu( pDecision,  v);
-                    return;
-                }
-                finally
-                {
-                    _servant_postinvoke(_so);
-                }
-            }
-        }
-    }
-
-    /**
-     * Operation validerVoeu
-     */
-    public void validerVoeu(pRectorat.Voeu v)
-        throws pRectorat.VoeuNonTrouve
-    {
-        while(true)
-        {
-            if (!this._is_local())
-            {
-                org.omg.CORBA.portable.InputStream _input = null;
-                try
-                {
-                    org.omg.CORBA.portable.OutputStream _output = this._request("validerVoeu",true);
-                    pRectorat.VoeuHelper.write(_output,v);
-                    _input = this._invoke(_output);
-                    return;
-                }
-                catch(org.omg.CORBA.portable.RemarshalException _exception)
-                {
-                    continue;
-                }
-                catch(org.omg.CORBA.portable.ApplicationException _exception)
-                {
-                    String _exception_id = _exception.getId();
-                    if (_exception_id.equals(pRectorat.VoeuNonTrouveHelper.id()))
-                    {
-                        throw pRectorat.VoeuNonTrouveHelper.read(_exception.getInputStream());
-                    }
-
-                    throw new org.omg.CORBA.UNKNOWN("Unexpected User Exception: "+ _exception_id);
-                }
-                finally
-                {
-                    this._releaseReply(_input);
-                }
-            }
-            else
-            {
-                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("validerVoeu",_opsClass);
-                if (_so == null)
-                   continue;
-                pRectorat.IGestionVoeuxOperations _self = (pRectorat.IGestionVoeuxOperations) _so.servant;
-                try
-                {
-                    _self.validerVoeu( v);
-                    return;
-                }
-                finally
-                {
-                    _servant_postinvoke(_so);
-                }
-            }
-        }
-    }
-
-    /**
-     * Operation relayerVoeu
-     */
-    public void relayerVoeu(pRectorat.Voeu v)
-        throws pRectorat.VoeuNonTrouve
-    {
-        while(true)
-        {
-            if (!this._is_local())
-            {
-                org.omg.CORBA.portable.InputStream _input = null;
-                try
-                {
-                    org.omg.CORBA.portable.OutputStream _output = this._request("relayerVoeu",true);
-                    pRectorat.VoeuHelper.write(_output,v);
-                    _input = this._invoke(_output);
-                    return;
-                }
-                catch(org.omg.CORBA.portable.RemarshalException _exception)
-                {
-                    continue;
-                }
-                catch(org.omg.CORBA.portable.ApplicationException _exception)
-                {
-                    String _exception_id = _exception.getId();
-                    if (_exception_id.equals(pRectorat.VoeuNonTrouveHelper.id()))
-                    {
-                        throw pRectorat.VoeuNonTrouveHelper.read(_exception.getInputStream());
-                    }
-
-                    throw new org.omg.CORBA.UNKNOWN("Unexpected User Exception: "+ _exception_id);
-                }
-                finally
-                {
-                    this._releaseReply(_input);
-                }
-            }
-            else
-            {
-                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("relayerVoeu",_opsClass);
-                if (_so == null)
-                   continue;
-                pRectorat.IGestionVoeuxOperations _self = (pRectorat.IGestionVoeuxOperations) _so.servant;
-                try
-                {
-                    _self.relayerVoeu( v);
                     return;
                 }
                 finally

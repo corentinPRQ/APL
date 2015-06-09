@@ -97,7 +97,7 @@ public class EtudiantNonTrouveHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/EtudiantNonTrouve:1.0";
+    private final static String _id = "IDL:pRectorat/EtudiantNonTrouve:1.0";
 
     /**
      * Read EtudiantNonTrouve from a marshalled stream

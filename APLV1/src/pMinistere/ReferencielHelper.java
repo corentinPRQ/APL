@@ -80,7 +80,7 @@ public class ReferencielHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Ministere/Referenciel:1.0";
+    private final static String _id = "IDL:pMinistere/Referenciel:1.0";
 
     /**
      * Read Referenciel from a marshalled stream

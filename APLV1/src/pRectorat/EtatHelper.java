@@ -64,7 +64,7 @@ public class EtatHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/Etat:1.0";
+    private final static String _id = "IDL:pRectorat/Etat:1.0";
 
     /**
      * Read Etat from a marshalled stream

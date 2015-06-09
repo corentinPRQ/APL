@@ -109,7 +109,7 @@ public class VoeuHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/Voeu:1.0";
+    private final static String _id = "IDL:pRectorat/Voeu:1.0";
 
     /**
      * Read Voeu from a marshalled stream

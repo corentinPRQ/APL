@@ -80,7 +80,7 @@ public class listeNotesHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Universite/listeNotes:1.0";
+    private final static String _id = "IDL:pUniversite/listeNotes:1.0";
 
     /**
      * Read listeNotes from a marshalled stream

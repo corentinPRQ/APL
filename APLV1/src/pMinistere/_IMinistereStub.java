@@ -10,7 +10,7 @@ public class _IMinistereStub extends org.omg.CORBA.portable.ObjectImpl
 {
     static final String[] _ids_list =
     {
-        "IDL:Ministere/IMinistere:1.0"
+        "IDL:pMinistere/IMinistere:1.0"
     };
 
     public String[] _ids()

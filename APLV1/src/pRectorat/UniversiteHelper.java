@@ -103,7 +103,7 @@ public class UniversiteHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/Universite:1.0";
+    private final static String _id = "IDL:pRectorat/Universite:1.0";
 
     /**
      * Read Universite from a marshalled stream

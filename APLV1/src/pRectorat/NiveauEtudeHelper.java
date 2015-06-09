@@ -60,7 +60,7 @@ public class NiveauEtudeHelper
         return _id;
     }
 
-    private final static String _id = "IDL:Rectorat/NiveauEtude:1.0";
+    private final static String _id = "IDL:pRectorat/NiveauEtude:1.0";
 
     /**
      * Read NiveauEtude from a marshalled stream
