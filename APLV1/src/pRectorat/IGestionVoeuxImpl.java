@@ -1,7 +1,9 @@
 package pRectorat;
 
 import java.io.FileNotFoundException;
+
 import utilitaires.utils;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
@@ -9,16 +11,28 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Properties;
 
+import org.omg.CORBA.ORB;
+import org.omg.CosNaming.NamingContext;
+
 import Applications.PeriodeApplication;
+import ClientsServeurs.ClientGestionVoeuxUniversite;
 
 public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
+	private org.omg.CORBA.ORB orb;
+	private NamingContext nameRoot;
+	private String nomObj;
+	
 	
 	private Hashtable<String, Diplome[]> listeAccreditation;
 	private Hashtable<String, Voeu[]> listeVoeux;
 	
 	//constructeur par défaut
-	public IGestionVoeuxImpl(){
+	public IGestionVoeuxImpl(ORB orb, NamingContext nameRoot, String nomObj){
 		//Liste d'accréditation à charger avec un fichier
+		this.orb = orb;
+		this.nameRoot = nameRoot;
+		this.nomObj = nomObj;
+		
 		listeAccreditation = new Hashtable<String, Diplome[]>();
 		listeVoeux = new Hashtable<String, Voeu[]>();
 	}
@@ -31,7 +45,6 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 
 	@Override
 	public Accred[] getListeAccreditations() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -77,13 +90,16 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 
 	
 	private void validerVoeu(Voeu v) throws VoeuNonTrouve {
+		String idObj = "Midi-Pyrenees_Gestion";
+		ClientGestionVoeuxUniversite cu = new ClientGestionVoeuxUniversite(orb, nameRoot, nomObj, idObj);
 		
 		boolean prerequisOK=false;
-		String dipV = v.acreditation.noD;
-		String[]PR = {""}; //TODO appel à la méthode getPrérequis de université avec en param l'intitulé de la formation 
+		String dipV = v.acreditation.libelleD;
+		//appel à la méthode getPrérequis de université avec en param l'intitulé de la formation
+		Diplome[] pr = cu.getListePrerequis(dipV); 
 		String formaEtu = ""; //TODO récupérer la formation du mec
-		for(int i=0; i<PR.length; i++){
-			if(PR[i].equals(formaEtu)){
+		for(int i=0; i<pr.length; i++){
+			if(pr[i].libelle.equals(formaEtu)){
 				prerequisOK=true;
 			}
 			break;
@@ -125,7 +141,8 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	}
 		
 
-	public static void changerPeriode() {
+	
+	public void changerPeriode(String periode) {
 		//La méthode consiste en une MAJ du properties
 				Properties p;
 				p=null;
@@ -142,12 +159,13 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 					FileOutputStream fos;
 					try {
 						fos = new FileOutputStream("parametres.properties");
-						if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_1.toString())){
+						System.out.println(p.getProperty("periode"));
+						if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_1)){
 							p.setProperty("periode", PeriodeApplication.PERIODE_2.toString());
-						}else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_2.toString())){
+						}else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_2)){
 							p.setProperty("periode", PeriodeApplication.PERIODE_3.toString());
 						}
-						else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_3.toString())){
+						else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_3)){
 							p.setProperty("periode", PeriodeApplication.PERIODE_4.toString());
 						}
 						//Enregistrement
@@ -169,8 +187,6 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	public Voeu[] consulterListeVoeu(Etudiant etu) {
 		return listeVoeux.get(etu.noEtu);
 	}
-	
-
 
 	/**
 	 * Permet d'enregistrer un voeu dans la liste des voeux
@@ -201,8 +217,6 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 			this.listeVoeux.put(v.noE, tabV);
 		}else{
 			System.out.println("Déjà 5 voeux ont été fait");
-		}
-		
+		}	
 	}
-
 }

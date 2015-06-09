@@ -73,14 +73,11 @@ public class RectoratHelper
                     return org.omg.CORBA.ORB.init().create_recursive_tc(id());
                 _working = true;
                 org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init();
-                org.omg.CORBA.StructMember []_members = new org.omg.CORBA.StructMember[2];
+                org.omg.CORBA.StructMember []_members = new org.omg.CORBA.StructMember[1];
 
                 _members[0] = new org.omg.CORBA.StructMember();
-                _members[0].name = "noRec";
+                _members[0].name = "nomAcademie";
                 _members[0].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
-                _members[1] = new org.omg.CORBA.StructMember();
-                _members[1].name = "nomAcademie";
-                _members[1].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
                 _tc = orb.create_struct_tc(id(),"Rectorat",_members);
                 _working = false;
             }
@@ -108,7 +105,6 @@ public class RectoratHelper
     {
         pRectorat.Rectorat new_one = new pRectorat.Rectorat();
 
-        new_one.noRec = istream.read_string();
         new_one.nomAcademie = istream.read_string();
 
         return new_one;
@@ -121,7 +117,6 @@ public class RectoratHelper
      */
     public static void write(org.omg.CORBA.portable.OutputStream ostream, pRectorat.Rectorat value)
     {
-        ostream.write_string(value.noRec);
         ostream.write_string(value.nomAcademie);
     }
 

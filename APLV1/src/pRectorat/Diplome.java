@@ -8,11 +8,6 @@ package pRectorat;
 public final class Diplome implements org.omg.CORBA.portable.IDLEntity
 {
     /**
-     * Struct member noDiplome
-     */
-    public String noDiplome;
-
-    /**
      * Struct member libelle
      */
     public String libelle;
@@ -30,13 +25,11 @@ public final class Diplome implements org.omg.CORBA.portable.IDLEntity
 
     /**
      * Constructor with fields initialization
-     * @param noDiplome noDiplome struct member
      * @param libelle libelle struct member
      * @param niveau niveau struct member
      */
-    public Diplome(String noDiplome, String libelle, pRectorat.NiveauEtude niveau)
+    public Diplome(String libelle, pRectorat.NiveauEtude niveau)
     {
-        this.noDiplome = noDiplome;
         this.libelle = libelle;
         this.niveau = niveau;
     }

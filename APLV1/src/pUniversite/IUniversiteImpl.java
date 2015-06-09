@@ -302,7 +302,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 				else{ 
 					ne=NiveauEtude.master;
 				}
-				Diplome d = new Diplome(numDipPR, nomDipPR, ne);
+				Diplome d = new Diplome(nomDipPR, ne);
 				diplomes[cpteur] = d;
 				cpteur++;
 				

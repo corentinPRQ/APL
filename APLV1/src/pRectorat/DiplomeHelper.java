@@ -73,17 +73,14 @@ public class DiplomeHelper
                     return org.omg.CORBA.ORB.init().create_recursive_tc(id());
                 _working = true;
                 org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init();
-                org.omg.CORBA.StructMember []_members = new org.omg.CORBA.StructMember[3];
+                org.omg.CORBA.StructMember []_members = new org.omg.CORBA.StructMember[2];
 
                 _members[0] = new org.omg.CORBA.StructMember();
-                _members[0].name = "noDiplome";
+                _members[0].name = "libelle";
                 _members[0].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
                 _members[1] = new org.omg.CORBA.StructMember();
-                _members[1].name = "libelle";
-                _members[1].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
-                _members[2] = new org.omg.CORBA.StructMember();
-                _members[2].name = "niveau";
-                _members[2].type = pRectorat.NiveauEtudeHelper.type();
+                _members[1].name = "niveau";
+                _members[1].type = pRectorat.NiveauEtudeHelper.type();
                 _tc = orb.create_struct_tc(id(),"Diplome",_members);
                 _working = false;
             }
@@ -111,7 +108,6 @@ public class DiplomeHelper
     {
         pRectorat.Diplome new_one = new pRectorat.Diplome();
 
-        new_one.noDiplome = istream.read_string();
         new_one.libelle = istream.read_string();
         new_one.niveau = pRectorat.NiveauEtudeHelper.read(istream);
 
@@ -125,7 +121,6 @@ public class DiplomeHelper
      */
     public static void write(org.omg.CORBA.portable.OutputStream ostream, pRectorat.Diplome value)
     {
-        ostream.write_string(value.noDiplome);
         ostream.write_string(value.libelle);
         pRectorat.NiveauEtudeHelper.write(ostream,value.niveau);
     }

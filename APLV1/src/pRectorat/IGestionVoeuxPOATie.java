@@ -120,6 +120,4 @@ public class IGestionVoeuxPOATie extends IGestionVoeuxPOA
         _tie.repondreVoeu( pDecision,  v);
     }
 
-   
-
 }

@@ -47,6 +47,4 @@ public interface IGestionVoeuxOperations
     public void repondreVoeu(pRectorat.DecisionEtudiant pDecision, pRectorat.Voeu v)
         throws pRectorat.VoeuNonTrouve;
 
-   
-
 }

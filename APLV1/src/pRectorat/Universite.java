@@ -8,11 +8,6 @@ package pRectorat;
 public final class Universite implements org.omg.CORBA.portable.IDLEntity
 {
     /**
-     * Struct member noUniv
-     */
-    public String noUniv;
-
-    /**
      * Struct member nomUniv
      */
     public String nomUniv;
@@ -35,14 +30,12 @@ public final class Universite implements org.omg.CORBA.portable.IDLEntity
 
     /**
      * Constructor with fields initialization
-     * @param noUniv noUniv struct member
      * @param nomUniv nomUniv struct member
      * @param idR idR struct member
      * @param adresse adresse struct member
      */
-    public Universite(String noUniv, String nomUniv, pRectorat.Rectorat idR, String adresse)
+    public Universite(String nomUniv, pRectorat.Rectorat idR, String adresse)
     {
-        this.noUniv = noUniv;
         this.nomUniv = nomUniv;
         this.idR = idR;
         this.adresse = adresse;

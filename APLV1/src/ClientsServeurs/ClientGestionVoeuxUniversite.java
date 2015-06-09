@@ -66,8 +66,8 @@ public class ClientGestionVoeuxUniversite implements Runnable{
 		monUniv.majListes();
 	}
 	
-	public void getListePrerequis(String dip){
-		monUniv.getListePrerequis(dip);
+	public Diplome[] getListePrerequis(String dip){
+		return(monUniv.getListePrerequis(dip));
 	}
 	
 	public static void main(String args[]) {
@@ -83,7 +83,7 @@ public class ClientGestionVoeuxUniversite implements Runnable{
 					org.omg.CosNaming.NamingContextHelper.narrow(orb.resolve_initial_references("NameService"));
 
 			// Construction du nom a enregistrer
-			String nomObj = "Midi-Pyrenees_GVC";
+			String nomObj = "Midi-Pyrenees_GVU";
 			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomObj, idObj);
 			cu.travailler();
 			

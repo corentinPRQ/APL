@@ -73,20 +73,17 @@ public class UniversiteHelper
                     return org.omg.CORBA.ORB.init().create_recursive_tc(id());
                 _working = true;
                 org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init();
-                org.omg.CORBA.StructMember []_members = new org.omg.CORBA.StructMember[4];
+                org.omg.CORBA.StructMember []_members = new org.omg.CORBA.StructMember[3];
 
                 _members[0] = new org.omg.CORBA.StructMember();
-                _members[0].name = "noUniv";
+                _members[0].name = "nomUniv";
                 _members[0].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
                 _members[1] = new org.omg.CORBA.StructMember();
-                _members[1].name = "nomUniv";
-                _members[1].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
+                _members[1].name = "idR";
+                _members[1].type = pRectorat.RectoratHelper.type();
                 _members[2] = new org.omg.CORBA.StructMember();
-                _members[2].name = "idR";
-                _members[2].type = pRectorat.RectoratHelper.type();
-                _members[3] = new org.omg.CORBA.StructMember();
-                _members[3].name = "adresse";
-                _members[3].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
+                _members[2].name = "adresse";
+                _members[2].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
                 _tc = orb.create_struct_tc(id(),"Universite",_members);
                 _working = false;
             }
@@ -114,7 +111,6 @@ public class UniversiteHelper
     {
         pRectorat.Universite new_one = new pRectorat.Universite();
 
-        new_one.noUniv = istream.read_string();
         new_one.nomUniv = istream.read_string();
         new_one.idR = pRectorat.RectoratHelper.read(istream);
         new_one.adresse = istream.read_string();
@@ -129,7 +125,6 @@ public class UniversiteHelper
      */
     public static void write(org.omg.CORBA.portable.OutputStream ostream, pRectorat.Universite value)
     {
-        ostream.write_string(value.noUniv);
         ostream.write_string(value.nomUniv);
         pRectorat.RectoratHelper.write(ostream,value.idR);
         ostream.write_string(value.adresse);

@@ -159,6 +159,4 @@ public abstract class IGestionVoeuxPOA extends org.omg.PortableServer.Servant
         return _output;
     }
 
-   
-
 }
