@@ -39,8 +39,6 @@ public abstract class IGestionVoeuxPOA extends org.omg.PortableServer.Servant
                 return _invoke__get_getListeAccreditations(_is, handler);
         } else if (opName.equals("_get_getVoeux")) {
                 return _invoke__get_getVoeux(_is, handler);
-        } else if (opName.equals("changerPeriode")) {
-                return _invoke_changerPeriode(_is, handler);
         } else if (opName.equals("consulterListeVoeu")) {
                 return _invoke_consulterListeVoeu(_is, handler);
         } else if (opName.equals("faireVoeu")) {
@@ -161,17 +159,6 @@ public abstract class IGestionVoeuxPOA extends org.omg.PortableServer.Servant
         return _output;
     }
 
-    private org.omg.CORBA.portable.OutputStream _invoke_changerPeriode(
-            final org.omg.CORBA.portable.InputStream _is,
-            final org.omg.CORBA.portable.ResponseHandler handler) {
-        org.omg.CORBA.portable.OutputStream _output;
-        String arg0_in = _is.read_string();
-
-        changerPeriode(arg0_in);
-
-        _output = handler.createReply();
-
-        return _output;
-    }
+   
 
 }

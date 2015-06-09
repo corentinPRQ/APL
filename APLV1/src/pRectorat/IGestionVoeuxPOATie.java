@@ -120,12 +120,6 @@ public class IGestionVoeuxPOATie extends IGestionVoeuxPOA
         _tie.repondreVoeu( pDecision,  v);
     }
 
-    /**
-     * Operation changerPeriode
-     */
-    public void changerPeriode(String periode)
-    {
-        _tie.changerPeriode( periode);
-    }
+   
 
 }

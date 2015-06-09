@@ -125,8 +125,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	}
 		
 
-	@Override
-	public void changerPeriode(String periode) {
+	public static void changerPeriode() {
 		//La méthode consiste en une MAJ du properties
 				Properties p;
 				p=null;
@@ -143,13 +142,12 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 					FileOutputStream fos;
 					try {
 						fos = new FileOutputStream("parametres.properties");
-						System.out.println(p.getProperty("periode"));
-						if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_1)){
+						if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_1.toString())){
 							p.setProperty("periode", PeriodeApplication.PERIODE_2.toString());
-						}else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_2)){
+						}else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_2.toString())){
 							p.setProperty("periode", PeriodeApplication.PERIODE_3.toString());
 						}
-						else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_3)){
+						else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_3.toString())){
 							p.setProperty("periode", PeriodeApplication.PERIODE_4.toString());
 						}
 						//Enregistrement
@@ -171,6 +169,8 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	public Voeu[] consulterListeVoeu(Etudiant etu) {
 		return listeVoeux.get(etu.noEtu);
 	}
+	
+
 
 	/**
 	 * Permet d'enregistrer un voeu dans la liste des voeux

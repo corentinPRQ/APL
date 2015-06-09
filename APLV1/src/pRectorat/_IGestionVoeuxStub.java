@@ -402,15 +402,8 @@ public class _IGestionVoeuxStub extends org.omg.CORBA.portable.ObjectImpl
                 if (_so == null)
                    continue;
                 pRectorat.IGestionVoeuxOperations _self = (pRectorat.IGestionVoeuxOperations) _so.servant;
-                try
-                {
-                    _self.changerPeriode( periode);
-                    return;
-                }
-                finally
-                {
-                    _servant_postinvoke(_so);
-                }
+               
+               
             }
         }
     }
