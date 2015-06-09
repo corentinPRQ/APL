@@ -79,10 +79,10 @@ public class AccredHelper
                 _members[0].name = "noAccred";
                 _members[0].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
                 _members[1] = new org.omg.CORBA.StructMember();
-                _members[1].name = "noD";
+                _members[1].name = "libelleD";
                 _members[1].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
                 _members[2] = new org.omg.CORBA.StructMember();
-                _members[2].name = "noUniv";
+                _members[2].name = "libelleU";
                 _members[2].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
                 _tc = orb.create_struct_tc(id(),"Accred",_members);
                 _working = false;
@@ -112,8 +112,8 @@ public class AccredHelper
         pRectorat.Accred new_one = new pRectorat.Accred();
 
         new_one.noAccred = istream.read_string();
-        new_one.noD = istream.read_string();
-        new_one.noUniv = istream.read_string();
+        new_one.libelleD = istream.read_string();
+        new_one.libelleU = istream.read_string();
 
         return new_one;
     }
@@ -126,8 +126,8 @@ public class AccredHelper
     public static void write(org.omg.CORBA.portable.OutputStream ostream, pRectorat.Accred value)
     {
         ostream.write_string(value.noAccred);
-        ostream.write_string(value.noD);
-        ostream.write_string(value.noUniv);
+        ostream.write_string(value.libelleD);
+        ostream.write_string(value.libelleU);
     }
 
 }

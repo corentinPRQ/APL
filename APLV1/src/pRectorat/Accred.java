@@ -13,14 +13,14 @@ public final class Accred implements org.omg.CORBA.portable.IDLEntity
     public String noAccred;
 
     /**
-     * Struct member noD
+     * Struct member libelleD
      */
-    public String noD;
+    public String libelleD;
 
     /**
-     * Struct member noUniv
+     * Struct member libelleU
      */
-    public String noUniv;
+    public String libelleU;
 
     /**
      * Default constructor
@@ -31,14 +31,14 @@ public final class Accred implements org.omg.CORBA.portable.IDLEntity
     /**
      * Constructor with fields initialization
      * @param noAccred noAccred struct member
-     * @param noD noD struct member
-     * @param noUniv noUniv struct member
+     * @param libelleD libelleD struct member
+     * @param libelleU libelleU struct member
      */
-    public Accred(String noAccred, String noD, String noUniv)
+    public Accred(String noAccred, String libelleD, String libelleU)
     {
         this.noAccred = noAccred;
-        this.noD = noD;
-        this.noUniv = noUniv;
+        this.libelleD = libelleD;
+        this.libelleU = libelleU;
     }
 
 }

@@ -102,7 +102,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	private void validerVoeu(Voeu v) throws VoeuNonTrouve {
 		
 		boolean prerequisOK=false;
-		String dipV = v.acreditation.noD;
+		//String dipV = v.acreditation.noD;
 		String[]PR = {""}; //TODO appel à la méthode getPrérequis de université avec en param l'intitulé de la formation 
 		String formaEtu = ""; //TODO récupérer la formation du mec
 		for(int i=0; i<PR.length; i++){
