@@ -15,10 +15,8 @@ import pRectorat.IGestionVoeux;
 import pUniversite.IUniversite;
 
 
-public class ClientUniversiteMinistere implements Runnable{
+public class ClientGestionVoeuxMinistere implements Runnable{
 
-	public static IUniversite monUniv;
-	public static IGestionVoeux monGV;
 	public static IMinistere monM;
 	
 	private org.omg.CORBA.ORB orb;
@@ -26,7 +24,7 @@ public class ClientUniversiteMinistere implements Runnable{
 	private String nomObj;
 	private String idObj;
 
-	public ClientUniversiteMinistere(ORB orb, NamingContext nameRoot, String nomObj,
+	public ClientGestionVoeuxMinistere(ORB orb, NamingContext nameRoot, String nomObj,
 			String idObj) {
 		super();
 		this.orb = orb;
@@ -68,7 +66,7 @@ public class ClientUniversiteMinistere implements Runnable{
 	
 	private void recupererReferenciel (){
 		Diplome[] referenciel = new Diplome[100]; 
-		referenciel = ClientUniversiteMinistere.monM.getReferenciel();
+		referenciel = ClientGestionVoeuxMinistere.monM.getReferenciel();
 		System.out.println("Taille du tableau : " + referenciel.length);
 		for (int i = 0; i<referenciel.length; i++){
 			System.out.println(referenciel[i].libelle);
@@ -95,8 +93,8 @@ public class ClientUniversiteMinistere implements Runnable{
 //			BufferedReader in1 = new BufferedReader(new InputStreamReader(System.in));
 //			String nomObj = in1.readLine();
 			String nomObj = "UnivClient";
-			ClientUniversiteMinistere cu = new ClientUniversiteMinistere(orb, nameRoot, nomObj, idObj);
-			cu.travailler();
+			ClientGestionVoeuxMinistere cr = new ClientGestionVoeuxMinistere(orb, nameRoot, nomObj, idObj);
+			cr.travailler();
 			
 		} catch (InvalidName e) {
 			// TODO Auto-generated catch block
