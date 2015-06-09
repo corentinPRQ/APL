@@ -6,8 +6,11 @@
 
 package GUI;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Properties;
 
+import utilitaires.utils;
 import ClientsServeurs.ClientEtudiantGV;
 
 /**
@@ -33,9 +36,21 @@ public class IHM_FaireUnVoeu extends javax.swing.JFrame {
     private void initComponents() {
 
     	//Chargement du properties pour gestion des périodes
-    	Properties params = utils.load("parametres.properties");
-    	String periode_en_cours = params.getProperty("periode");
-    	System.out.println(periode_en_cours);
+    	Properties params=null;
+		try {
+			params = utils.load("parametres.properties");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(params != null){
+	    	String periode_en_cours = params.getProperty("periode");
+	    	System.out.println(periode_en_cours);
+		}
+
     	
         jLabel1 = new javax.swing.JLabel();
         lb_diplome = new javax.swing.JLabel();

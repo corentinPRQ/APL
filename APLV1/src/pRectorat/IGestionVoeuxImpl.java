@@ -1,6 +1,7 @@
 package pRectorat;
 
 import java.io.FileNotFoundException;
+import utilitaires.utils;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
@@ -135,7 +136,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 					System.out.println("Echec ouverture properties");
 					e.printStackTrace();
 				} catch (IOException e) {
-					System.out.println("Echec ouverture properties")
+					System.out.println("Echec ouverture properties");
 					e.printStackTrace();
 				}
 				if( p!= null){
@@ -154,10 +155,13 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 						//Enregistrement
 						p.store(fos,null);
 					} catch (FileNotFoundException e1) {
-						System.out.println("Echec écriture properties")
+						System.out.println("Echec écriture properties");
 						e1.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					
+				}	
 
 		
 	}
