@@ -34,6 +34,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	 */
 	@Override
 	public Voeu[] getVoeux() {
+		//tada
 		Collection<Voeu[]> colV = this.listeVoeux.values();
 		int taille = colV.size();
 		//on crée un tableau de voeux en fonction de la taille max potentielle
