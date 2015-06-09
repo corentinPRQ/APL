@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.omg.CosNaming.NamingContext;
 
+import pRectorat.IGestionVoeux;
 import pRectorat.Voeu;
 import pUniversite.IUniversite;
 
