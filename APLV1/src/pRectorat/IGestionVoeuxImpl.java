@@ -69,8 +69,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	}
 
 	
-	@Override
-	public void validerVoeu(Voeu v) throws VoeuNonTrouve {
+	private void validerVoeu(Voeu v) throws VoeuNonTrouve {
 		
 		boolean prerequisOK=false;
 		String dipV = v.acreditation.noD;
@@ -88,13 +87,6 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 		}else{
 			this.setEtatVoeu(v, Etat.non_valide);
 		}
-		
-	}
-
-	@Override
-	@Deprecated
-	public void relayerVoeu(Voeu voeu) throws VoeuNonTrouve {
-		// TODO Auto-generated method stub
 		
 	}
 
