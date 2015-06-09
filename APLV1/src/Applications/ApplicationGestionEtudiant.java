@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.NamingContext;
 
-import ClientsServeurs.ClientUniversiteMinistere;
+import ClientsServeurs.ClientGestionVoeuxMinistere;
 
 public class ApplicationGestionEtudiant {
 	public static int noEtu = 0;
@@ -44,7 +44,7 @@ public class ApplicationGestionEtudiant {
 			String nomOb = "ClientEtudiantGV";
 
 			System.out.println("lancement du client Etudiant");
-			ClientUniversiteMinistere cu = new ClientUniversiteMinistere(orb, nameRoot, nomOb, idObj);
+			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomOb, idObj);
 
 			Thread tcli = new Thread(cu);
 			tcli.start();

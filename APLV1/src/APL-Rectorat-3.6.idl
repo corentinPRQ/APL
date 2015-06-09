@@ -114,9 +114,5 @@ module pRectorat {
 		
 		//Opération permettant a  letudiant de repondre a  un voeu en emettant sa decision "COMMENT ACCEDER AU VOEU PAR SON ID ? IOR ?"
 		void repondreVoeu(in DecisionEtudiant pDecision, in Voeu v) raises (VoeuNonTrouve); 	
-
-		// Opération permettant au ministere de changer la periode
-		void changerPeriode(in string periode);		
-		};
 };
 
