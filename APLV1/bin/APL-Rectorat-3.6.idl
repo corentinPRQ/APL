@@ -33,7 +33,6 @@ module pRectorat {
 	
 	//Identifiant d un rectorat
 	struct Rectorat{
-		string noRec;
 		string nomAcademie;
 	};
 	
@@ -44,7 +43,6 @@ module pRectorat {
 	};
 	
 	struct Universite{
-		string noUniv;
 		string nomUniv;
 		Rectorat idR; 
 		string adresse;	
@@ -52,13 +50,12 @@ module pRectorat {
 		
 	struct Accred{
 		string noAccred;
-		string noD;
-		string noUniv;
+		string libelleD;
+		string libelleU;
 	};	
 	
 	//Un diplome a un numero, un nom et un niveau d'étude={Licence, Master}
 	struct Diplome{
-		string noDiplome;
 		string libelle;
 		NiveauEtude niveau;		
 	};
@@ -114,5 +111,6 @@ module pRectorat {
 		
 		//Opération permettant a  letudiant de repondre a  un voeu en emettant sa decision "COMMENT ACCEDER AU VOEU PAR SON ID ? IOR ?"
 		void repondreVoeu(in DecisionEtudiant pDecision, in Voeu v) raises (VoeuNonTrouve); 	
+	};
 };
 
