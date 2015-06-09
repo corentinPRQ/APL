@@ -1,8 +1,14 @@
 package pRectorat;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Properties;
+
+import Applications.PeriodeApplication;
 
 public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	
@@ -120,10 +126,43 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 
 	@Override
 	public void changerPeriode(String periode) {
-		// TODO Auto-generated method stub
+		//La méthode consiste en une MAJ du properties
+				Properties p;
+				p=null;
+				try {
+					p = utils.load("parametres.properties");
+				} catch (FileNotFoundException e) {
+					System.out.println("Echec ouverture properties");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("Echec ouverture properties")
+					e.printStackTrace();
+				}
+				if( p!= null){
+					FileOutputStream fos;
+					try {
+						fos = new FileOutputStream("parametres.properties");
+						System.out.println(p.getProperty("periode"));
+						if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_1)){
+							p.setProperty("periode", PeriodeApplication.PERIODE_2.toString());
+						}else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_2)){
+							p.setProperty("periode", PeriodeApplication.PERIODE_3.toString());
+						}
+						else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_3)){
+							p.setProperty("periode", PeriodeApplication.PERIODE_4.toString());
+						}
+						//Enregistrement
+						p.store(fos,null);
+					} catch (FileNotFoundException e1) {
+						System.out.println("Echec écriture properties")
+						e1.printStackTrace();
+					}
+					
+
 		
 	}
 
+			
 	@Override
 	public Voeu[] consulterListeVoeu(Etudiant etu) {
 		return listeVoeux.get(etu.noEtu);

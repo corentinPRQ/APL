@@ -6,6 +6,8 @@
 
 package GUI;
 
+import java.util.Properties;
+
 import ClientsServeurs.ClientEtudiantGV;
 
 /**
@@ -30,6 +32,11 @@ public class IHM_FaireUnVoeu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+    	//Chargement du properties pour gestion des périodes
+    	Properties params = utils.load("parametres.properties");
+    	String periode_en_cours = params.getProperty("periode");
+    	System.out.println(periode_en_cours);
+    	
         jLabel1 = new javax.swing.JLabel();
         lb_diplome = new javax.swing.JLabel();
         cb_listeAccreditation = new javax.swing.JComboBox();
