@@ -22,9 +22,9 @@ import Applications.PeriodeApplication;
 import ClientsServeurs.ClientGestionVoeuxUniversite;
 
 public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
-	private org.omg.CORBA.ORB orb;
-	private NamingContext nameRoot;
-	private String nomObj;
+	private static org.omg.CORBA.ORB orb;
+	private static NamingContext nameRoot;
+	private static String nomObj;
 	
 	
 	private Hashtable<String, Voeu[]> listeVoeux;
@@ -242,116 +242,6 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	}
 	
 	private void initialiserUsers(String path){
-		String lineRead; 
-		String[] lineSplit;
-		String login="";
-		String mdp="";
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(path));	 
-			lineRead = br.readLine();
-
-			while ((lineRead = br.readLine()) != null) {
-				lineSplit = lineRead.split(";",4);
-//				System.out.println("line split users : "+ lineSplit[0] + " - " + lineSplit[1] + " - " + lineSplit[2] + " - " +lineSplit[3]);
-				for (int i=0; i<lineSplit.length; i++){
-					switch(i){  
-					case 0: login = lineSplit[0];
-					break;
-					case 1: mdp = lineSplit[1];
-					break;
-					case 2 : 
-						break;
-					case 3 : 
-						break;
-					default : 
-						break;
-					}
-				}
-//				System.out.println("Login : "+login + " - mdp : "+mdp);
-				this.listeUtilisateurs.put(login, mdp);
-			}
-
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-	
-	private void initialiserAccred(String path) {
-		/*
-		 * Réfléchir à un moyen d'intégrer les notes pour les prérequis! 
-		 */
-		
-		String lineRead;
-		String[] lineSplit;
-		String Universite="";
-		String Diplome="";
-
-		
-		//variable comptant le nombre de lignes du fichier par diplome
-		int cpteur = 0;
-		String DipPrecedent = "";
-		ArrayList<String> list = new ArrayList<String>();
-		String[] lesUniv;
-	
-		
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(path));	 
-			lineRead = br.readLine();
-
-			while ((lineRead = br.readLine()) != null) {
-				lineSplit = lineRead.split(";",2);
-//				System.out.println("line split : "+ lineSplit[0] + " - " + lineSplit[1] + " - " + lineSplit[2] + " - " +lineSplit[3]);
-				for (int i=0; i<lineSplit.length; i++){
-					switch(i){  
-					case 0 : Diplome= lineSplit[0];
-					break;
-					case 1 : Universite = lineSplit[1];
-					break;
-					default : System.err.println("Erreur dans la lecture du fichier");
-					break;
-					}					
-				}
-				//si le numéro etudiant est différent du précédent c'est qu'on changé d'étudiant, donc on enregistre ses notes
-//				System.out.println("NumDIP : " + numDip + " - numDipPrecedent : " + numDipPrecedent);
-				if (!Diplome.equals(DipPrecedent)){
-					lesUniv = new String[list.size()];
-					for(int i=0;i<list.size();i++){
-						lesUniv[i]=list.get(i);
-					}
-					this.listeAccreditation.put(DipPrecedent,lesUniv);
-					list=new ArrayList<String>();
-				}
-				
-				DipPrecedent = Diplome;
-				
-				list.add(Universite);
-				
-			}
-			lesUniv = new String[list.size()];
-			for(int i=0;i<list.size();i++){
-				lesUniv[i]=list.get(i);
-			}
-			this.listeAccreditation.put(Diplome, lesUniv);
-
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-	
-	public void afficherAccred(){
-		Enumeration<String> enumKey = listeAccreditation.keys();
-		while(enumKey.hasMoreElements()) {
-		    String key = enumKey.nextElement();
-		    String[] val = listeAccreditation.get(key);
-		    System.out.println("Pour le diplome : "+key);
-		    System.out.println("Universite: ");
-		    for(int i=0;i<val.length;i++){
-		    	System.out.println(val[i]);
-		    }
-		}
-	}
-	
-	private void initialiserUsers(String path){
 		String lineRead;
 		String[] lineSplit;
 		String login="";
@@ -463,14 +353,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	
 	public static void main (String [] args){
 		System.out.println("Debut du test");
-	    IGestionVoeuxImpl igV=new IGestionVoeuxImpl();
-	    igV.afficherAccred();
-		
-	}
-	
-	public static void main (String [] args){
-		System.out.println("Debut du test");
-	    IGestionVoeuxImpl igV=new IGestionVoeuxImpl();
+	    IGestionVoeuxImpl igV=new IGestionVoeuxImpl(orb, nameRoot, nomObj);
 	    igV.afficherAccred();
 		
 	}
