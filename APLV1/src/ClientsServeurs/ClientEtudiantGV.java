@@ -88,6 +88,9 @@ public class ClientEtudiantGV implements Runnable{
 		monGestionVoeu.consulterListeVoeu(etu);
 	}
 	
+	public void getListeAccreditation(Etudiant etu){
+		monGestionVoeu.getListeAccreditations();
+	}
 	
 	public static void main(String args[]) {
 		try {
