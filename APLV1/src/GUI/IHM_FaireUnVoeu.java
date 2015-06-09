@@ -35,7 +35,7 @@ public class IHM_FaireUnVoeu extends javax.swing.JFrame {
     private void initComponents() {
 
     	//Chargement du properties pour gestion des périodes
-    	Properties params;
+    	Properties params=null;
 		try {
 			params = utils.load("parametres.properties");
 		} catch (FileNotFoundException e) {
