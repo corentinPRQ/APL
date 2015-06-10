@@ -6,6 +6,10 @@
 
 package GUI;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
+import pRectorat.Voeu;
 import Applications.ApplicationGestionEtudiant;
 
 /**
@@ -14,16 +18,26 @@ import Applications.ApplicationGestionEtudiant;
  */
 public class IHM_Etudiant extends javax.swing.JFrame {
 	private ApplicationGestionEtudiant applicationGE;
-
+	private static ArrayList<Voeu> listeVoeux;
+	private static Hashtable<String, String> listeEtudiants;
     /**
      * Creates new form IHM_Etudiant
      */
-    public IHM_Etudiant() {
-    	ConnexionEtudiant coE = new ConnexionEtudiant(this);
-    	coE.setVisible(true);
-    	this.setEnabled(false);
+    public IHM_Etudiant(ArrayList<Voeu> lesVoeux, Hashtable<String, String> lesEtus) {
         initComponents();
+        
+    	ConnexionEtudiant coE = new ConnexionEtudiant(this, listeEtudiants);
+    	listeVoeux = lesVoeux;
+    	listeEtudiants = lesEtus;
+        coE.setVisible(true);
+    	this.setVisible(false);
         applicationGE = new ApplicationGestionEtudiant();
+        
+        //il faut tester si l'id du premier voeu = 0 pour savoir s'il y a des voeux à afficher.
+        if(listeVoeux.size()>=1 && !listeVoeux.get(0).idV.equals("listeVide")){
+        	//afficher les voeux dans le tableau
+        	
+        }
     }
 
     /**
@@ -168,6 +182,7 @@ public class IHM_Etudiant extends javax.swing.JFrame {
 
     private void bt_ajouterVoeuxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ajouterVoeuxActionPerformed
         // TODO add your handling code here:
+    	IHM_FaireUnVoeu ihm_fv = new IHM_FaireUnVoeu();
     }//GEN-LAST:event_bt_ajouterVoeuxActionPerformed
 
     private void bt_repondreVoeuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_repondreVoeuActionPerformed
@@ -204,7 +219,7 @@ public class IHM_Etudiant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IHM_Etudiant().setVisible(true);
+                new IHM_Etudiant(listeVoeux, listeEtudiants).setVisible(true);
             }
         });
     }
