@@ -19,14 +19,14 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
 	
 	private static IHM_Etudiant parent;
 	private static Hashtable<String, String> listeEtudiants;
-	
+	public static ClientEtudiantGV clientEtuGV;
 
     /**
      * Creates new form ConnexionEtudiant
      */
-    public ConnexionEtudiant(IHM_Etudiant parent, Hashtable<String, String> lesEtu) {
+    public ConnexionEtudiant(IHM_Etudiant parent, ClientEtudiantGV client) {
     	parent = parent;
-    	listeEtudiants = lesEtu;
+    	ConnexionEtudiant.clientEtuGV = client;
         initComponents();
     }
 
