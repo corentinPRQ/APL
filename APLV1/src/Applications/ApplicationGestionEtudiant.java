@@ -8,14 +8,11 @@ import java.util.Hashtable;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.NamingContext;
 
-import ClientsServeurs.ClientEtudiantGV;
-import ClientsServeurs.ClientGestionVoeuGV;
 import pRectorat.Etudiant;
 import pRectorat.Voeu;
 import pUniversite.Matiere;
 import pUniversite.Note;
 import ClientsServeurs.ClientEtudiantGV;
-import GUI.IHM_Etudiant;
 import GUI.IHM_Etudiant;
 
 public class ApplicationGestionEtudiant {
@@ -36,6 +33,8 @@ public class ApplicationGestionEtudiant {
 		try {
 			noEtu++;
 			idEtdu = noEtu; 
+			listeEtudiants = new Hashtable<String, String>();
+			listeVoeux = new ArrayList<Voeu>();
 			// TODO Auto-generated method stub
 			// Intialisation de l'ORB
 			//************************
@@ -60,29 +59,30 @@ public class ApplicationGestionEtudiant {
 			ClientEtudiantGV ce = new ClientEtudiantGV(orb, nameRoot, nomObj, idObj);
 			
 			Voeu[] lesVoeux = ce.consulterListeVoeux(new Etudiant("1", "Melet"));
+
 			for (int i = 0; i<lesVoeux.length; i++){
 				if (Integer.parseInt(lesVoeux[i].noE) == idEtdu){
 					listeVoeux.add(lesVoeux[i]);
 				}
 			}
+<<<<<<< HEAD
 			
 			
 			/*initialiserEtudiant("src/usersEtu.csv");
 			IHM_Etudiant ihmE = new IHM_Etudiant(listeVoeux, listeEtudiants);*/
+=======
+>>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
 			
         	Thread tcli = new Thread(ce);
 			
 			IHM_Etudiant ihmEtu = new IHM_Etudiant(ce);
 			
-            tcli.start();
-
-
 		} catch (InvalidName e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
+<<<<<<< HEAD
 	
 	/*private static void initialiserEtudiant(String path){
 		String lineRead;
@@ -119,6 +119,8 @@ public class ApplicationGestionEtudiant {
 		}
 	}*/
 
+=======
+>>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
 }
 //	System.out.println("1 : Faire un voeux");
 //	System.out.println("2 : Consulter liste de voeux");

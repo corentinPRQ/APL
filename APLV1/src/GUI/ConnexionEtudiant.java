@@ -18,15 +18,14 @@ import ClientsServeurs.ClientEtudiantGV;
 public class ConnexionEtudiant extends javax.swing.JFrame {
 	
 	private static IHM_Etudiant parent;
-	//private static Hashtable<String, String> listeEtudiants;
-	private static ClientEtudiantGV clientEtuGV;
+	private static Hashtable<String, String> listeEtudiants;
+
     /**
      * Creates new form ConnexionEtudiant
      */
-    public ConnexionEtudiant(IHM_Etudiant pParent, ClientEtudiantGV pCliEtuGV) {
-    	parent = pParent;
-    	ConnexionEtudiant.clientEtuGV = pCliEtuGV;
-    	//listeEtudiants = lesEtu;
+    public ConnexionEtudiant(IHM_Etudiant parent, Hashtable<String, String> lesEtu) {
+    	parent = parent;
+    	listeEtudiants = lesEtu;
         initComponents();
     }
 

@@ -21,17 +21,20 @@ import org.omg.CosNaming.NamingContext;
 import Applications.PeriodeApplication;
 import ClientsServeurs.ClientGestionVoeuxUniversite;
 
-public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
+public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 	private static org.omg.CORBA.ORB orb;
 	private static NamingContext nameRoot;
 	private static String nomObj;
-	
-	
+
 	private Hashtable<String, Voeu[]> listeVoeux;
-	private Hashtable<String,String[]> listeAccreditation;
+	private Hashtable<String, String[]> listeAccreditation;
 	private Accred[] lesAccred;
+<<<<<<< HEAD
 	private Hashtable<String,String> listeUtilisateurs;
 
+=======
+	private Hashtable<String, String> listeUtilisateurs;
+>>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
 	
 	//constructeur par défaut
 	public IGestionVoeuxImpl(ORB orb, NamingContext nameRoot, String nomObj){
@@ -39,10 +42,10 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 		this.orb = orb;
 		this.nameRoot = nameRoot;
 		this.nomObj = nomObj;
-		
+
 		listeAccreditation = new Hashtable<String, String[]>();
 		listeVoeux = new Hashtable<String, Voeu[]>();
-		listeUtilisateurs = new Hashtable<String,String>();
+		listeUtilisateurs = new Hashtable<String, String>();
 		initialiserUsers("src/users.csv");
 		initialiserAccred("src/Accreditation.csv");
 	}
@@ -52,15 +55,15 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public boolean identifier(String login, String mdp) throws EtudiantNonTrouve {
-		System.out.println("INDENTIFICATION");
-		if (!listeUtilisateurs.containsKey(login)) {
-			//mettre un code GUI pour notifier de l'erreur d'identification
+
+	public boolean identifier(String login, String mdp)
+			throws EtudiantNonTrouve {
+		System.out.println("Identification depuis le rectorat");
+		if (!listeUtilisateurs.contains(login)) {
+			// mettre un code GUI pour notifier de l'erreur d'identification
 			throw new EtudiantNonTrouve();
-		}
-		else {
-			if (listeUtilisateurs.get(login).equals(mdp)==false){
+		} else {
+			if (listeUtilisateurs.get(login).equals(mdp) == false) {
 				return false;
 			}
 		}
@@ -73,35 +76,46 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	}
 
 	/**
-	 * Renvoie tous les voeux
-	 * le return est un tableau de voeux qui peut contenir des valeurs null à la fin
+	 * Renvoie tous les voeux le return est un tableau de voeux qui peut
+	 * contenir des valeurs null à la fin
 	 */
 	@Override
 	public Voeu[] getVoeux() {
-		//
+		
+		
 		Collection<Voeu[]> colV = this.listeVoeux.values();
 		int taille = colV.size();
-		//on crée un tableau de voeux en fonction de la taille max potentielle
-		Voeu[]tabV = new Voeu [5*taille];
-		int i=0;
-		Iterator <Voeu[]> itV = colV.iterator();
-		//On parcourt la collection de Voeu[5] de la HM
-		while(itV.hasNext()){
-			Voeu[] tabVTmp= new Voeu[5];
+		// on crée un tableau de voeux en fonction de la taille max potentielle
+		Voeu[] tabV = new Voeu[5 * taille];
+		int i = 0;
+		Iterator<Voeu[]> itV = colV.iterator();
+		// On parcourt la collection de Voeu[5] de la HM
+		while (itV.hasNext()) {
+			Voeu[] tabVTmp = new Voeu[5];
 			tabVTmp = itV.next();
 			// on parcourt les 5 voeux potentiel
-			for(int j=0; tabVTmp[j] != null && j<tabVTmp.length; j++){
-				tabV[i]= tabVTmp[j];
+			for (int j = 0; tabVTmp[j] != null && j < tabVTmp.length; j++) {
+				tabV[i] = tabVTmp[j];
 				i++;
 			}
-			
 		}
-		
-		return tabV;
+
+		if (tabV.length != 0) {
+			System.out.println(tabV.length);
+			return tabV;
+		} else {
+			Voeu v = new Voeu("listeVide", "0", new Accred(), new Rectorat(), null,
+					null);
+			Voeu[] lesV = new Voeu[1];
+			lesV[0] = v;
+			return (lesV);
+		}
+
 	}
-	
+
 	/**
 	 * Permet de modifier la décision de l'étudiant sur un voeu
+	 * 
 	 * @param pDecision
 	 * @param v
 	 * @throws VoeuNonTrouve
@@ -109,105 +123,122 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	@Override
 	public void repondreVoeu(DecisionEtudiant pDecision, Voeu v)
 			throws VoeuNonTrouve {
-		v.decEtudiant=pDecision;
+		v.decEtudiant = pDecision;
 	}
 
-	
 	private void validerVoeu(Voeu v) throws VoeuNonTrouve {
-		String idObj = "Midi-Pyrenees_Gestion";
-		ClientGestionVoeuxUniversite cu = new ClientGestionVoeuxUniversite(orb, nameRoot, nomObj, idObj);
-		
-		boolean prerequisOK=false;
+		String idObj = v.acreditation.libelleU + "_Gestion";
+		ClientGestionVoeuxUniversite cu = new ClientGestionVoeuxUniversite(orb,
+				nameRoot, nomObj, idObj);
+
+		boolean prerequisOK = false;
 		String dipV = v.acreditation.libelleD;
-		//appel à la méthode getPrérequis de université avec en param l'intitulé de la formation
-		Diplome[] pr = cu.getListePrerequis(dipV); 
-		String formaEtu = ""; //TODO récupérer la formation du mec
-		for(int i=0; i<pr.length; i++){
-			if(pr[i].libelle.equals(formaEtu)){
-				prerequisOK=true;
+		// appel à la méthode getPrérequis de université avec en param
+		// l'intitulé de la formation
+		Diplome[] pr = cu.getListePrerequis(dipV);
+		String formaEtu = "L3 Miage"; // TODO récupérer la formation du mec
+		for (int i = 0; i < pr.length; i++) {
+			if (pr[i].libelle.equals(formaEtu)) {
+				prerequisOK = true;
 			}
 			break;
 		}
-		
-		if(prerequisOK){
+
+		if (prerequisOK) {
 			this.setEtatVoeu(v, Etat.valide_encours);
-		}else{
+		} else {
 			this.setEtatVoeu(v, Etat.non_valide);
 		}
-		
 	}
 
 	@Override
-	//Change l'état d'un voeu
+	// Change l'état d'un voeu
 	public void setEtatVoeu(Voeu v, Etat e) {
-		
-		switch(v.etatVoeu.value()){
-		//Le voeu est crée il peut passer "Valide en cours" ou "Non Valide"
+
+		switch (v.etatVoeu.value()) {
+		// Le voeu est crée il peut passer "Valide en cours" ou "Non Valide"
 		case Etat._cree:
-			if(e==Etat.valide_encours || e==Etat.non_valide)
-				v.etatVoeu=e;
+			if (e == Etat.valide_encours || e == Etat.non_valide)
+				v.etatVoeu = e;
 			break;
-		//Le voeu est "Valide en cours" il peut passer "liste principale" "liste secondaire" "refus"
+		// Le voeu est "Valide en cours" il peut passer "liste principale"
+		// "liste secondaire" "refus"
 		case Etat._valide_encours:
-			if(e==Etat.liste_principale || e==Etat.liste_secondaire|| e==Etat.refus)
-				v.etatVoeu=e;
+			if (e == Etat.liste_principale || e == Etat.liste_secondaire
+					|| e == Etat.refus)
+				v.etatVoeu = e;
 			break;
-		//Le voeu est en liste secondaire il peut passer en refus
+		// Le voeu est en liste secondaire il peut passer en refus
 		case Etat._liste_secondaire:
-			if(e==Etat.refus)
-				v.etatVoeu=e;
+			if (e == Etat.refus)
+				v.etatVoeu = e;
 			break;
 		default:
-			System.err.println("Le voeu est dans un état dans lequel il ne peux pas changer d'état : "+v.etatVoeu.toString());
+			System.err
+					.println("Le voeu est dans un état dans lequel il ne peux pas changer d'état : "
+							+ v.etatVoeu.toString());
 			break;
-		
-		}	
-	}
-		
 
-	
+		}
+	}
+
 	public static void changerPeriode() {
-		//La méthode consiste en une MAJ du properties
-				Properties p;
-				p=null;
-				try {
-					p = utils.load("parametres.properties");
-				} catch (FileNotFoundException e) {
-					System.out.println("Echec ouverture properties");
-					e.printStackTrace();
-				} catch (IOException e) {
-					System.out.println("Echec ouverture properties");
-					e.printStackTrace();
+		// La méthode consiste en une MAJ du properties
+		Properties p;
+		p = null;
+		try {
+			p = utils.load("parametres.properties");
+		} catch (FileNotFoundException e) {
+			System.out.println("Echec ouverture properties");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Echec ouverture properties");
+			e.printStackTrace();
+		}
+		if (p != null) {
+			FileOutputStream fos;
+			try {
+				fos = new FileOutputStream("parametres.properties");
+				if (p.getProperty("periode").equals(
+						PeriodeApplication.PERIODE_1.toString())) {
+					p.setProperty("periode",
+							PeriodeApplication.PERIODE_2.toString());
+				} else if (p.getProperty("periode").equals(
+						PeriodeApplication.PERIODE_2.toString())) {
+					p.setProperty("periode",
+							PeriodeApplication.PERIODE_3.toString());
+				} else if (p.getProperty("periode").equals(
+						PeriodeApplication.PERIODE_3.toString())) {
+					p.setProperty("periode",
+							PeriodeApplication.PERIODE_4.toString());
 				}
-				if( p!= null){
-					FileOutputStream fos;
-					try {
-						fos = new FileOutputStream("parametres.properties");
-						if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_1.toString())){
-							p.setProperty("periode", PeriodeApplication.PERIODE_2.toString());
-						}else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_2.toString())){
-							p.setProperty("periode", PeriodeApplication.PERIODE_3.toString());
-						}
-						else if(p.getProperty("periode").equals(PeriodeApplication.PERIODE_3.toString())){
-							p.setProperty("periode", PeriodeApplication.PERIODE_4.toString());
-						}
-						//Enregistrement
-						p.store(fos,null);
-					} catch (FileNotFoundException e1) {
-						System.out.println("Echec écriture properties");
-						e1.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}	
-
-		
+				// Enregistrement
+				p.store(fos, null);
+			} catch (FileNotFoundException e1) {
+				System.out.println("Echec écriture properties");
+				e1.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
-			
+
 	@Override
 	public Voeu[] consulterListeVoeu(Etudiant etu) {
-		return listeVoeux.get(etu.noEtu);
+		System.out.println("consulterListeVoeu");
+		if (listeVoeux.get(etu.noEtu)==null){
+			Voeu v = new Voeu("listeVide", "0", new Accred("1", "d1", "PS"), new Rectorat("Midi-Pyrenees"), DecisionEtudiant.non,
+					Etat.cree);
+			Voeu[] lesV = new Voeu[1];
+			lesV[0] = v;
+			System.out.println("return liste Vide");
+			return (lesV);
+		}
+		else{
+			System.out.println("return les voeux");
+			return listeVoeux.get(etu.noEtu);
+		}
 	}
 
 	/**
@@ -215,68 +246,72 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	 */
 	@Override
 	public void faireVoeu(Voeu v) throws VoeuNonTrouve, EtudiantNonTrouve {
-		Rectorat r = new Rectorat(); 
-		//TODO lancer l'application gestVoeu avec un id de rectorat et voir comment le récupérer
-		if(v.idR==r){
+		Rectorat r = new Rectorat();
+		// TODO lancer l'application gestVoeu avec un id de rectorat et voir
+		// comment le récupérer
+		if (v.idR == r) {
 			this.enregistrerVoeu(v);
-		}else{
-			//TODO trouver le gestVoeu
+		} else {
+			// TODO trouver le gestVoeu
 			// lebongestVoeu.faireVoeu(v);
 		}
-		
-		
+
 	}
-	
-	private void enregistrerVoeu(Voeu v){
-		Voeu [] tabV = new Voeu[5];
+
+	private void enregistrerVoeu(Voeu v) {
+		Voeu[] tabV = new Voeu[5];
 		tabV = this.listeVoeux.get(v.noE);
-		int i=0;
-		while(tabV[i] != null && i<tabV.length){
+		int i = 0;
+		while (tabV[i] != null && i < tabV.length) {
 			i++;
 		}
-		if (i<tabV.length){
+		if (i < tabV.length) {
 			tabV[i] = v;
 			this.listeVoeux.put(v.noE, tabV);
-		}else{
+		} else {
 			System.out.println("Déjà 5 voeux ont été fait");
-		}	
+		}
 	}
-	
-	private void initialiserUsers(String path){
+
+	private void initialiserUsers(String path) {
 		String lineRead;
 		String[] lineSplit;
-		String login="";
-		String mdp="";
+		String login = "";
+		String mdp = "";
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(path));	 
+			BufferedReader br = new BufferedReader(new FileReader(path));
 			lineRead = br.readLine();
 
 			while ((lineRead = br.readLine()) != null) {
-				lineSplit = lineRead.split(";",4);
-//				System.out.println("line split users : "+ lineSplit[0] + " - " + lineSplit[1] + " - " + lineSplit[2] + " - " +lineSplit[3]);
-				for (int i=0; i<lineSplit.length; i++){
-					switch(i){  
-					case 0: login = lineSplit[0];
-					break;
-					case 1: mdp = lineSplit[1];
-					break;
-					case 2 : 
+				lineSplit = lineRead.split(";", 4);
+				// System.out.println("line split users : "+ lineSplit[0] +
+				// " - " + lineSplit[1] + " - " + lineSplit[2] + " - "
+				// +lineSplit[3]);
+				for (int i = 0; i < lineSplit.length; i++) {
+					switch (i) {
+					case 0:
+						login = lineSplit[0];
 						break;
-					case 3 : 
+					case 1:
+						mdp = lineSplit[1];
 						break;
-					default : 
+					case 2:
+						break;
+					case 3:
+						break;
+					default:
 						break;
 					}
 				}
-//				System.out.println("Login : "+login + " - mdp : "+mdp);
+				// System.out.println("Login : "+login + " - mdp : "+mdp);
 				this.listeUtilisateurs.put(login, mdp);
 			}
 
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void initialiserAccred(String path) {
 		/*
 		 * Réfléchir à un moyen d'intégrer les notes pour les prérequis! 
@@ -342,31 +377,29 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 			this.lesAccred=new Accred[listAccred.size()];
 			for(int i=0;i<listAccred.size();i++){
 				lesAccred[i]=listAccred.get(i);
-			}
+			}		
+			NoAccred="";
+			listAccred = new ArrayList<Accred>();
+		
+//			lesUniv = new String[list.size()];
 
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	
 	public void afficherAccred(){
 		for(int i = 0;i<lesAccred.length;i++){
 			System.out.println(lesAccred[i].toString());
 		}
 	}
-	
-	public static void main (String [] args) throws EtudiantNonTrouve{
-		System.out.println("Debut du test");
-	    IGestionVoeuxImpl igV=new IGestionVoeuxImpl(orb, nameRoot, nomObj);
-	    System.out.println(igV.listeUtilisateurs.size());
-	    for (String string : igV.listeUtilisateurs.values()) {
-			System.out.println(string);
-		}
-	    System.out.println(igV.identifier("21001324", "hugo"));
-	    
-	    igV.afficherAccred();
-	    
-	 //    try {
+
+	// public static void main (String [] args){
+	// System.out.println("Debut du test");
+	// IGestionVoeuxImpl igV=new IGestionVoeuxImpl(orb, nameRoot, nomObj);
+	//
+	// try {
 	// igV.validerVoeu(new Voeu("v1", "e1", new Accred("a1", "dip1", "lib1"),
 	// new Rectorat("midi-pyrenees"), DecisionEtudiant.oui,
 	// Etat.liste_principale));
@@ -374,7 +407,6 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	// // TODO Auto-generated catch block
 	// e.printStackTrace();
 	// }
-		
-	}
+	//
+	// }
 }
-	
