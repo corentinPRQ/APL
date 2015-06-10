@@ -57,13 +57,13 @@ public class ClientGestionVoeuxUniversite implements Runnable{
 		}		
 	}
 
-	public void getCandidatures(){
+	/*public void getCandidatures(){
 		monUniv.getCandidatures();
 	}
 	
 	public void majListes(){
 		monUniv.majListes();
-	}
+	}*/
 	
 	public Diplome[] getListePrerequis(String dip){
 		return(monUniv.getListePrerequis(dip));
