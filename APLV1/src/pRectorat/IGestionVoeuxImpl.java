@@ -31,6 +31,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	private Hashtable<String,String[]> listeAccreditation;
 	private Accred[] lesAccred;
 	private Hashtable<String,String> listeUtilisateurs;
+
 	
 	//constructeur par défaut
 	public IGestionVoeuxImpl(ORB orb, NamingContext nameRoot, String nomObj){

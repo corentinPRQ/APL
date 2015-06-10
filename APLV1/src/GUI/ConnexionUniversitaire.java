@@ -42,7 +42,7 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
 
         lb_titre.setText("CONNEXION");
 
-        lb_numEtu.setText("Numéro étudiant");
+        lb_numEtu.setText("Identifiant universitaire");
 
         lb_mdp.setText("Mot de passe");
 

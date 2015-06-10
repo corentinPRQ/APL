@@ -35,6 +35,7 @@ public class IHM_Etudiant extends javax.swing.JFrame {
     	ConnexionEtudiant coE = new ConnexionEtudiant(this,pCliEtGV);
     	coE.setVisible(true);
     	this.setEnabled(false);
+    	initComponents();
     }
 
    /* public IHM_Etudiant(ArrayList<Voeu> lesVoeux, Hashtable<String, String> lesEtus) {
@@ -88,18 +89,18 @@ public class IHM_Etudiant extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Voeu", "Etat", "Reponse UniversitÃ©", "Reponse etudiant"
+                "Voeu", "Etat", "Reponse Université", "Réponse etudiant"
             }
         ));
         tab_voeux.setViewportView(tab_VoeuxEtudiant);
 
-        lb_titreTableau.setText("Voeux de l'Ã©tudiant");
+        lb_titreTableau.setText("Voeux de l'étudiant");
 
-        lb_titre.setText("Interface etudiant");
+        lb_titre.setText("Interface étudiant");
 
-        lb_connecteEnTantQue.setText("ConnectÃ© en tant que :");
+        lb_connecteEnTantQue.setText("Connecté en tant que :");
 
-        lb_nomEtud.setText("Nom de l'etudiant");
+        lb_nomEtud.setText("Nom de l'étudiant");
 
         bt_ajouterVoeux.setText("Ajouter un voeu");
         bt_ajouterVoeux.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +109,7 @@ public class IHM_Etudiant extends javax.swing.JFrame {
             }
         });
 
-        bt_repondreVoeu.setText("Repondre Ã  un voeu");
+        bt_repondreVoeu.setText("Répondre à un voeu");
         bt_repondreVoeu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_repondreVoeuActionPerformed(evt);

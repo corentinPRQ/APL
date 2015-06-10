@@ -58,14 +58,14 @@ public class ApplicationGestionEtudiant {
 
 			System.out.println("lancement du client Etudiant");
 			ClientEtudiantGV ce = new ClientEtudiantGV(orb, nameRoot, nomObj, idObj);
-			/*
+			
 			Voeu[] lesVoeux = ce.consulterListeVoeux(new Etudiant("1", "Melet"));
 			for (int i = 0; i<lesVoeux.length; i++){
 				if (Integer.parseInt(lesVoeux[i].noE) == idEtdu){
 					listeVoeux.add(lesVoeux[i]);
 				}
 			}
-			*/
+			
 			
 			/*initialiserEtudiant("src/usersEtu.csv");
 			IHM_Etudiant ihmE = new IHM_Etudiant(listeVoeux, listeEtudiants);*/
@@ -84,7 +84,7 @@ public class ApplicationGestionEtudiant {
 
 	}
 	
-	private static void initialiserEtudiant(String path){
+	/*private static void initialiserEtudiant(String path){
 		String lineRead;
 		String[] lineSplit;
 		String login="";
@@ -117,7 +117,7 @@ public class ApplicationGestionEtudiant {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 }
 //	System.out.println("1 : Faire un voeux");

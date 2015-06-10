@@ -44,11 +44,11 @@ public class IHM_Universitaire extends javax.swing.JFrame {
 
         lb_titreInterface.setText("Interface universitaire");
 
-        lb_connecteEnTantQue.setText("ConnectÃ© en tant que :");
+        lb_connecteEnTantQue.setText("Connecté en tant que :");
 
         lb_nomUniversitaire.setText("Nom de l'universitaire");
 
-        lb_titre_Periode.setText("Periode :");
+        lb_titre_Periode.setText("Période :");
 
         jLabel4.setText("titrePeriode");
 
