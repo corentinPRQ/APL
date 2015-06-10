@@ -6,6 +6,10 @@ package GUI;
  * and open the template in the editor.
  */
 
+import pUniversite.IUniversiteImpl;
+import pUniversite.universitaireNonTrouve;
+import ClientsServeurs.ClientEtudiantGV;
+import ClientsServeurs.ClientUniversiteGV;
 import GUI.*;
 
 /**
@@ -14,10 +18,18 @@ import GUI.*;
  */
 public class ConnexionUniversitaire extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ConnexionEtudiant
-     */
-    public ConnexionUniversitaire() {
+	private static IHM_Universitaire parent;
+	//private static Hashtable<String, String> listeEtudiants;
+	private static IUniversiteImpl universite;
+
+	/**
+	 * Constructeur IHM de connexion d'un universitaire.
+	 * @param pParent
+	 * @param pCliUnivGV
+	 */
+    public ConnexionUniversitaire(IHM_Universitaire pParent, IUniversiteImpl pUniv) {
+    	parent = pParent;
+    	ConnexionUniversitaire.universite = pUniv;
         initComponents();
     }
 
@@ -49,7 +61,12 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
         bt_connexion.setText("Se connecter");
         bt_connexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_connexionActionPerformed(evt);
+                try {
+					bt_connexionActionPerformed(evt);
+				} catch (universitaireNonTrouve e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -108,13 +125,24 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_connexionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_connexionActionPerformed
+    /**
+     * Btn de connexion d'un universitaire
+     * @param evt
+     * @throws universitaireNonTrouve 
+     */
+    private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) throws universitaireNonTrouve {//GEN-FIRST:event_bt_connexionActionPerformed
+    	if (ConnexionUniversitaire.universite.identifier(this.tf_numEtu.getText(),this.tf_mdp.getText()))
+    	{
+    		this.setVisible(false);
+    		this.parent.setVisible(true);
+    		this.parent.setEnabled(true);
+    	}
+    }
 
     private void bt_quitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_quitterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_quitterActionPerformed
+      this.setVisible(false);
+      this.dispose();
+    }
 
     /**
      * @param args the command line arguments
@@ -146,7 +174,7 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConnexionUniversitaire().setVisible(true);
+            	new ConnexionUniversitaire(parent,universite).setVisible(true);
             }
         });
     }
