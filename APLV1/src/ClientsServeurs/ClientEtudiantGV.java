@@ -29,7 +29,7 @@ public class ClientEtudiantGV implements Runnable{
 	private HashMap<String, ArrayList<Voeu>> listeDeVoeux;
 
 	public ClientEtudiantGV(ORB orb, NamingContext nameRoot, String nomObj,
-			String idObj, JFrame parent) {
+			String idObj) {
 		super();
 		this.orb = orb;
 		this.nameRoot = nameRoot;
@@ -50,11 +50,11 @@ public class ClientEtudiantGV implements Runnable{
 			System.out.println(orb.object_to_string(distantObj));
 	
 			// Construction du nom a enregistrer
-//			org.omg.CosNaming.NameComponent[] nameToRegister = new org.omg.CosNaming.NameComponent[1];
-//			nameToRegister[0] = new org.omg.CosNaming.NameComponent(this.nomObj,"");
+			org.omg.CosNaming.NameComponent[] nameToRegister = new org.omg.CosNaming.NameComponent[1];
+			nameToRegister[0] = new org.omg.CosNaming.NameComponent(this.nomObj,"");
 			
 			// Récupération du nom de l'objet distant
-			this.monGestionVoeu = IGestionVoeuxHelper.narrow(distantObj);
+			ClientEtudiantGV.monGestionVoeu = IGestionVoeuxHelper.narrow(distantObj);
 			
 		}
 		catch (Exception e) {
@@ -65,7 +65,7 @@ public class ClientEtudiantGV implements Runnable{
 	
 	public void faireVoeux(String idEtudiant, Accred pAccreditation, Voeu v){
 		try {
-			monGestionVoeu.faireVoeu(v);
+			ClientEtudiantGV.monGestionVoeu.faireVoeu(v);
 		} catch (VoeuNonTrouve e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class ClientEtudiantGV implements Runnable{
 
 	public void repondreProposition(DecisionEtudiant pDecision, Voeu v){
 		try {
-			monGestionVoeu.repondreVoeu(pDecision, v);
+			ClientEtudiantGV.monGestionVoeu.repondreVoeu(pDecision, v);
 		} catch (VoeuNonTrouve e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,11 +85,16 @@ public class ClientEtudiantGV implements Runnable{
 	}
 	
 	public void consulterListeVoeux(Etudiant etu){
-		monGestionVoeu.consulterListeVoeu(etu);
+		ClientEtudiantGV.monGestionVoeu.consulterListeVoeu(etu);
 	}
 	
 	public void getListeAccreditation(Etudiant etu){
-		monGestionVoeu.getListeAccreditations();
+		ClientEtudiantGV.monGestionVoeu.getListeAccreditations();
+	}
+	
+	public boolean identifier(String login, String mdp) throws EtudiantNonTrouve{
+		System.out.println(login + " - " +mdp );
+		return ClientEtudiantGV.monGestionVoeu.identifier(login, mdp);
 	}
 	
 	public static void main(String args[]) {
@@ -107,6 +112,7 @@ public class ClientEtudiantGV implements Runnable{
 			// Construction du nom a enregistrer
 			String nomObj = "Midi-Pyrenees_GVC";
 			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomObj, idObj);
+			
 			cu.travailler();
 			
 		} catch (InvalidName e) {

@@ -53,7 +53,8 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	}
 	
 	public boolean identifier(String login, String mdp) throws EtudiantNonTrouve {
-		if (!listeUtilisateurs.contains(login)) {
+		System.out.println("INDENTIFICATION");
+		if (!listeUtilisateurs.containsKey(login)) {
 			//mettre un code GUI pour notifier de l'erreur d'identification
 			throw new EtudiantNonTrouve();
 		}
@@ -353,9 +354,15 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 		}
 	}
 	
-	public static void main (String [] args){
+	public static void main (String [] args) throws EtudiantNonTrouve{
 		System.out.println("Debut du test");
 	    IGestionVoeuxImpl igV=new IGestionVoeuxImpl(orb, nameRoot, nomObj);
+	    System.out.println(igV.listeUtilisateurs.size());
+	    for (String string : igV.listeUtilisateurs.values()) {
+			System.out.println(string);
+		}
+	    System.out.println(igV.identifier("21001324", "hugo"));
+	    
 	    igV.afficherAccred();
 		
 	}

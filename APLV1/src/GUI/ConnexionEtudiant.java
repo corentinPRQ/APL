@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import org.apache.xerces.dom.ParentNode;
 
+import pRectorat.EtudiantNonTrouve;
 import ClientsServeurs.ClientEtudiantGV;
 
 /**
@@ -23,9 +24,9 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
     /**
      * Creates new form ConnexionEtudiant
      */
-    public ConnexionEtudiant(IHM_Etudiant pParent,ClientEtudiantGV pCliEtuGV) {
+    public ConnexionEtudiant(IHM_Etudiant pParent, ClientEtudiantGV pCliEtuGV) {
     	parent = pParent;
-    	clientEtuGV = pCliEtuGV;
+    	ConnexionEtudiant.clientEtuGV = pCliEtuGV;
         initComponents();
     }
 
@@ -50,14 +51,19 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
 
         lb_titre.setText("CONNEXION");
 
-        lb_numEtu.setText("NumÃ©ro Ã©tudiant");
+        lb_numEtu.setText("Numéro étudiant");
 
         lb_mdp.setText("Mot de passe");
 
         bt_connexion.setText("Se connecter");
         bt_connexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_connexionActionPerformed(evt);
+                try {
+					bt_connexionActionPerformed(evt);
+				} catch (EtudiantNonTrouve e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -116,10 +122,15 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_connexionActionPerformed
+    private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) throws EtudiantNonTrouve {//GEN-FIRST:event_bt_connexionActionPerformed
         // TODO add your handling code here:
-    	ConnexionEtudiant.this.parent.setVisible(true);
-    	this.setVisible(false);
+    	if (ConnexionEtudiant.clientEtuGV.identifier(this.tf_numEtu.getText(),this.tf_mdp.getText()))
+    	{
+    		this.setVisible(false);
+    		this.parent.setVisible(true);
+    		this.parent.setEnabled(true);
+    	}
+    	
     	   
     	
     	

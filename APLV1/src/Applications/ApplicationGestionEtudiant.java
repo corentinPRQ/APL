@@ -6,7 +6,10 @@ import java.io.InputStreamReader;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.NamingContext;
 
+import ClientsServeurs.ClientEtudiantGV;
+import ClientsServeurs.ClientGestionVoeuGV;
 import ClientsServeurs.ClientGestionVoeuxMinistere;
+import GUI.IHM_Etudiant;
 
 public class ApplicationGestionEtudiant {
 	public static int noEtu = 0;
@@ -44,10 +47,13 @@ public class ApplicationGestionEtudiant {
 			String nomOb = "ClientEtudiantGV";
 
 			System.out.println("lancement du client Etudiant");
-			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomOb, idObj);
+			ClientEtudiantGV cEgv = new ClientEtudiantGV(orb, nameRoot, nomOb, idObj);
 
-			Thread tcli = new Thread(cu);
-			tcli.start();
+        	Thread tcli = new Thread(cEgv);
+			
+			IHM_Etudiant ihmEtu = new IHM_Etudiant(cEgv);
+			
+            tcli.start();
 
 
 		} catch (InvalidName e) {

@@ -7,23 +7,24 @@
 package GUI;
 
 import Applications.ApplicationGestionEtudiant;
+import ClientsServeurs.ClientEtudiantGV;
 
 /**
  *
  * @author guilhem
  */
 public class IHM_Etudiant extends javax.swing.JFrame {
-	private ApplicationGestionEtudiant applicationGE;
+	private static ClientEtudiantGV clientEtuGV;
 
     /**
      * Creates new form IHM_Etudiant
      */
-    public IHM_Etudiant() {
-    	ConnexionEtudiant coE = new ConnexionEtudiant(this);
+    public IHM_Etudiant(ClientEtudiantGV pCliEtGV) {
+    	IHM_Etudiant.clientEtuGV = pCliEtGV;
+    	ConnexionEtudiant coE = new ConnexionEtudiant(this,pCliEtGV);
     	coE.setVisible(true);
     	this.setEnabled(false);
         initComponents();
-        applicationGE = new ApplicationGestionEtudiant();
     }
 
     /**
@@ -204,7 +205,7 @@ public class IHM_Etudiant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IHM_Etudiant().setVisible(true);
+                new IHM_Etudiant(clientEtuGV).setVisible(true);
             }
         });
     }
