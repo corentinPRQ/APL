@@ -56,7 +56,6 @@ public class ClientEtudiantGV implements Runnable{
 			
 			ClientEtudiantGV.monGestionVoeu = IGestionVoeuxHelper.narrow(distantObj);
 //			ClientEtudiantGV.monGestionVoeu.faireVoeu(new Voeu("1", "1", new Accred("1", "D1", "u1"), new Rectorat("mii"), DecisionEtudiant.oui_mais, Etat.cree));
-			ClientEtudiantGV.monGestionVoeu.getVoeux();
 //			System.out.println("GestionVoeu : " + this.monGestionVoeu);
 			
 		}
@@ -87,8 +86,9 @@ public class ClientEtudiantGV implements Runnable{
 		}
 	}
 	
-	public void consulterListeVoeux(Etudiant etu){
-		ClientEtudiantGV.monGestionVoeu.consulterListeVoeu(etu);
+	public Voeu[] consulterListeVoeux(Etudiant etu){
+		System.out.println("getVoeux du clientEtudiantGV");
+		return (ClientEtudiantGV.monGestionVoeu.consulterListeVoeu(etu));
 	}
 	
 	public void getListeAccreditation(Etudiant etu){

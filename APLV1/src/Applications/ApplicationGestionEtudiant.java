@@ -8,6 +8,7 @@ import java.util.Hashtable;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.NamingContext;
 
+import pRectorat.Etudiant;
 import pRectorat.Voeu;
 import pUniversite.Matiere;
 import pUniversite.Note;
@@ -55,7 +56,7 @@ public class ApplicationGestionEtudiant {
 			System.out.println("lancement du client Etudiant");
 			ClientEtudiantGV ce = new ClientEtudiantGV(orb, nameRoot, nomObj, idObj);
 			
-			Voeu[] lesVoeux = ce.getVoeux();
+			Voeu[] lesVoeux = ce.consulterListeVoeux(new Etudiant("1", "Melet"));
 			for (int i = 0; i<lesVoeux.length; i++){
 				if (Integer.parseInt(lesVoeux[i].noE) == idEtdu){
 					listeVoeux.add(lesVoeux[i]);
@@ -65,8 +66,6 @@ public class ApplicationGestionEtudiant {
 			initialiserEtudiant("src/usersEtu.csv");
 			IHM_Etudiant ihmE = new IHM_Etudiant(listeVoeux, listeEtudiants);
 			
-
-
 		} catch (InvalidName e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,7 +99,7 @@ public class ApplicationGestionEtudiant {
 						break;
 					}
 				}
-//				System.out.println("Login : "+login + " - mdp : "+mdp);
+				System.out.println("Login : "+login + " - mdp : "+mdp);
 				listeEtudiants.put(login, mdp);
 			}
 

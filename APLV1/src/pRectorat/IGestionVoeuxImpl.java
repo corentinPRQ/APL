@@ -76,7 +76,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 	 */
 	@Override
 	public Voeu[] getVoeux() {
-//		System.out.println("Entré dans le getVoeux de IGestionVoeuIMPL");
+		System.out.println("Entré dans le getVoeux de IGestionVoeuIMPL");
 //		Voeu vt = new Voeu("tests", "0", new Accred(), new Rectorat(), null,
 //				null);
 //		Voeu[] lesVt = new Voeu[1];
@@ -227,7 +227,19 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 
 	@Override
 	public Voeu[] consulterListeVoeu(Etudiant etu) {
-		return listeVoeux.get(etu.noEtu);
+		System.out.println("consulterListeVoeu");
+		if (listeVoeux.get(etu.noEtu)==null){
+			Voeu v = new Voeu("listeVide", "0", new Accred("1", "d1", "PS"), new Rectorat("Midi-Pyrenees"), DecisionEtudiant.non,
+					Etat.cree);
+			Voeu[] lesV = new Voeu[1];
+			lesV[0] = v;
+			System.out.println("return liste Vide");
+			return (lesV);
+		}
+		else{
+			System.out.println("return les voeux");
+			return listeVoeux.get(etu.noEtu);
+		}
 	}
 
 	/**
