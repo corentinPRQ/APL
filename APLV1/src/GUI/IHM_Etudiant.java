@@ -28,6 +28,7 @@ public class IHM_Etudiant extends javax.swing.JFrame {
         
     	ConnexionEtudiant coE = new ConnexionEtudiant(this, listeEtudiants);
     	listeVoeux = lesVoeux;
+    	System.out.println("Taille de la liste de Voeux de l'ihm : " + listeVoeux.size());
     	listeEtudiants = lesEtus;
         coE.setVisible(true);
     	this.setVisible(false);

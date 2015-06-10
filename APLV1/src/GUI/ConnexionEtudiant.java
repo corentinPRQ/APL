@@ -122,15 +122,11 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
     	}
 //    	ConnexionEtudiant.this.parent.setEnabled(true);
     	this.setVisible(false);
-    	   
-    	
-    	
     }//GEN-LAST:event_bt_connexionActionPerformed
 
     private void bt_quitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_quitterActionPerformed
         // TODO add your handling code here:
  
-
     }//GEN-LAST:event_bt_quitterActionPerformed
 
     /**

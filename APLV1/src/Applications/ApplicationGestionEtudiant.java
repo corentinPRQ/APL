@@ -33,6 +33,8 @@ public class ApplicationGestionEtudiant {
 		try {
 			noEtu++;
 			idEtdu = noEtu; 
+			listeEtudiants = new Hashtable<String, String>();
+			listeVoeux = new ArrayList<Voeu>();
 			// TODO Auto-generated method stub
 			// Intialisation de l'ORB
 			//************************
@@ -57,57 +59,20 @@ public class ApplicationGestionEtudiant {
 			ClientEtudiantGV ce = new ClientEtudiantGV(orb, nameRoot, nomObj, idObj);
 			
 			Voeu[] lesVoeux = ce.consulterListeVoeux(new Etudiant("1", "Melet"));
+
 			for (int i = 0; i<lesVoeux.length; i++){
 				if (Integer.parseInt(lesVoeux[i].noE) == idEtdu){
 					listeVoeux.add(lesVoeux[i]);
 				}
 			}
-			
-			initialiserEtudiant("src/usersEtu.csv");
+			System.out.println("Taille des voeux récupérés : " + listeVoeux.size());
 			IHM_Etudiant ihmE = new IHM_Etudiant(listeVoeux, listeEtudiants);
 			
 		} catch (InvalidName e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
-	
-	private static void initialiserEtudiant(String path){
-		String lineRead;
-		String[] lineSplit;
-		String login="";
-		String mdp="";
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(path));	 
-			lineRead = br.readLine();
-
-			while ((lineRead = br.readLine()) != null) {
-				lineSplit = lineRead.split(";",4);
-//				System.out.println("line split users : "+ lineSplit[0] + " - " + lineSplit[1] + " - " + lineSplit[2] + " - " +lineSplit[3]);
-				for (int i=0; i<lineSplit.length; i++){
-					switch(i){  
-					case 0: login = lineSplit[0];
-					break;
-					case 1: mdp = lineSplit[1];
-					break;
-					case 2 : 
-						break;
-					case 3 : 
-						break;
-					default : 
-						break;
-					}
-				}
-				System.out.println("Login : "+login + " - mdp : "+mdp);
-				listeEtudiants.put(login, mdp);
-			}
-
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-
 }
 //	System.out.println("1 : Faire un voeux");
 //	System.out.println("2 : Consulter liste de voeux");
