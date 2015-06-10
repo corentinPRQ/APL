@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 
 import org.apache.xerces.dom.ParentNode;
 
+import ClientsServeurs.ClientEtudiantGV;
+
 /**
  *
  * @author guilhem
@@ -17,12 +19,13 @@ import org.apache.xerces.dom.ParentNode;
 public class ConnexionEtudiant extends javax.swing.JFrame {
 	
 	private static IHM_Etudiant parent;
-
+	private static ClientEtudiantGV clientEtuGV;
     /**
      * Creates new form ConnexionEtudiant
      */
-    public ConnexionEtudiant(IHM_Etudiant parent) {
-    	parent = parent;
+    public ConnexionEtudiant(IHM_Etudiant pParent,ClientEtudiantGV pCliEtuGV) {
+    	parent = pParent;
+    	clientEtuGV = pCliEtuGV;
         initComponents();
     }
 
@@ -158,7 +161,7 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConnexionEtudiant(parent).setVisible(true);
+                new ConnexionEtudiant(parent,clientEtuGV).setVisible(true);
             }
         });
     }
