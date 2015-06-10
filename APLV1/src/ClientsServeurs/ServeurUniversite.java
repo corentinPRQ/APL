@@ -1,8 +1,9 @@
 package ClientsServeurs;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
-import java.util.Scanner;
+import java.util.Hashtable;
 
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NamingContext;
@@ -24,6 +25,7 @@ public class ServeurUniversite implements Runnable {
 	private org.omg.CORBA.ORB orb;
 	private NamingContext nameRoot;
 	private String nomObj;
+	private Hashtable<String, String> listeUniversitaires;
 
 
 	public ServeurUniversite(ORB orb, NamingContext nameRoot, String nomObj) {
@@ -31,6 +33,8 @@ public class ServeurUniversite implements Runnable {
 		this.orb = orb;
 		this.nameRoot = nameRoot;
 		this.nomObj = nomObj;
+		listeUniversitaires = new Hashtable<String, String>();
+		initialiserUsers("src/usersUniv.csv");
 	}
 	
 	public void travailler (){
@@ -42,7 +46,7 @@ public class ServeurUniversite implements Runnable {
 
 			// Creation du servant
 			//*********************
-			IUniversiteImpl monUniv = new IUniversiteImpl();
+			IUniversiteImpl monUniv = new IUniversiteImpl(listeUniversitaires);
 
 			// Activer le servant au sein du POA et recuperer son ID
 			byte[] monUnivId = rootPOA.activate_object(monUniv);
@@ -124,6 +128,41 @@ public class ServeurUniversite implements Runnable {
 	@Override
 	public void run() {
 		travailler();		
+	}
+	
+	private void initialiserUsers(String path){
+		String lineRead;
+		String[] lineSplit;
+		String login="";
+		String mdp="";
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(path));	 
+			lineRead = br.readLine();
+
+			while ((lineRead = br.readLine()) != null) {
+				lineSplit = lineRead.split(";",4);
+//				System.out.println("line split users : "+ lineSplit[0] + " - " + lineSplit[1] + " - " + lineSplit[2] + " - " +lineSplit[3]);
+				for (int i=0; i<lineSplit.length; i++){
+					switch(i){  
+					case 0: login = lineSplit[0];
+					break;
+					case 1: mdp = lineSplit[1];
+					break;
+					case 2 : 
+						break;
+					case 3 : 
+						break;
+					default : 
+						break;
+					}
+				}
+				System.out.println("Login : "+login + " - mdp : "+mdp);
+				this.listeUniversitaires.put(login, mdp);
+			}
+
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }
