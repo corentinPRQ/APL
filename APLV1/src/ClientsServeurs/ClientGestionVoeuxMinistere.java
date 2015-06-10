@@ -92,9 +92,9 @@ public class ClientGestionVoeuxMinistere implements Runnable{
 //			System.out.println("Sous quel nom voulez-vous enregistrer l'objet Corba ?");
 //			BufferedReader in1 = new BufferedReader(new InputStreamReader(System.in));
 //			String nomObj = in1.readLine();
-			String nomObj = "UnivClient";
-			ClientGestionVoeuxMinistere cr = new ClientGestionVoeuxMinistere(orb, nameRoot, nomObj, idObj);
-			cr.travailler();
+			String nomObj = "GVClient";
+			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomObj, idObj);
+			cu.travailler();
 			
 		} catch (InvalidName e) {
 			// TODO Auto-generated catch block

@@ -364,6 +364,15 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	    System.out.println(igV.identifier("21001324", "hugo"));
 	    
 	    igV.afficherAccred();
+	    
+	     try {
+	// igV.validerVoeu(new Voeu("v1", "e1", new Accred("a1", "dip1", "lib1"),
+	// new Rectorat("midi-pyrenees"), DecisionEtudiant.oui,
+	// Etat.liste_principale));
+	// } catch (VoeuNonTrouve e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
 		
 	}
 }

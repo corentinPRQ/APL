@@ -54,8 +54,7 @@ public class ClientGestionVoeuxUniversite implements Runnable{
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 
 	public void getCandidatures(){

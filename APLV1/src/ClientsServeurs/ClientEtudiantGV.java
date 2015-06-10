@@ -11,10 +11,12 @@ import org.omg.CosNaming.NamingContext;
 
 import pRectorat.Accred;
 import pRectorat.DecisionEtudiant;
+import pRectorat.Etat;
 import pRectorat.Etudiant;
 import pRectorat.EtudiantNonTrouve;
 import pRectorat.IGestionVoeux;
 import pRectorat.IGestionVoeuxHelper;
+import pRectorat.Rectorat;
 import pRectorat.Voeu;
 import pRectorat.VoeuNonTrouve;
 
@@ -36,6 +38,7 @@ public class ClientEtudiantGV implements Runnable{
 		this.nomObj = nomObj;
 		this.idObj = idObj;
 		this.listeDeVoeux = new HashMap<String, ArrayList<Voeu>>();
+		travailler();
 	}
 	
 	public void travailler(){
@@ -84,8 +87,10 @@ public class ClientEtudiantGV implements Runnable{
 		}
 	}
 	
-	public void consulterListeVoeux(Etudiant etu){
-		ClientEtudiantGV.monGestionVoeu.consulterListeVoeu(etu);
+	public Voeu[] consulterListeVoeux(Etudiant etu){
+		//ClientEtudiantGV.monGestionVoeu.consulterListeVoeu(etu);
+		System.out.println("getVoeux du clientEtudiantGV");
+		return (ClientEtudiantGV.monGestionVoeu.consulterListeVoeu(etu));
 	}
 	
 	public void getListeAccreditation(Etudiant etu){
@@ -95,6 +100,12 @@ public class ClientEtudiantGV implements Runnable{
 	public boolean identifier(String login, String mdp) throws EtudiantNonTrouve{
 		System.out.println(login + " - " +mdp );
 		return ClientEtudiantGV.monGestionVoeu.identifier(login, mdp);
+	}
+	
+	public Voeu[] getVoeux(){
+		System.out.println("getVoeux du clientEtudiantGV");
+		return (ClientEtudiantGV.monGestionVoeu.getVoeux());
+	
 	}
 	
 	public static void main(String args[]) {
