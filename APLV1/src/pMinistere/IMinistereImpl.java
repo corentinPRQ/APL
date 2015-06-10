@@ -61,7 +61,7 @@ public class IMinistereImpl extends IMinisterePOA {
 						break;
 					}
 				}
-				Diplome d = new Diplome(idD, libelle, ne);
+				Diplome d = new Diplome(libelle, ne);
 				referenciel.add(d);
 			}
 

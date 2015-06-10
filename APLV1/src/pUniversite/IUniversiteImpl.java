@@ -60,15 +60,14 @@ public class IUniversiteImpl extends IUniversitePOA{
 	}
 
 	@Override
-	public Voeu getCandidatures() {
-		//Chargement des voeux dans la liste des candidatures.
+	public Voeu getCandidatures() { //Elle est appelée où et quand cette méthode ? A sortir de l'IDL à mon avis. WTF le return 1 voeu ?
+		//Chargement des voeux dans la liste des candidatures. --> dans ce cas c'est un appel à getVoeux de gestV
 		return null;
 	}
 
 	@Override
 	public void enregistrerEtatCandidature(Voeu c, Etat e) throws voeuNonTrouve {
-		// TODO Auto-generated method stub
-		
+		// Appel de setEtatVoeu dans Voeu normalement	
 	}
 
 	@Override
@@ -92,20 +91,27 @@ public class IUniversiteImpl extends IUniversitePOA{
 	}
 
 	@Override
-	public void majListes() {
+	public void majListes() { //TODO à sortir de l'IDL
 		/* 
 		 * Là par contre je sais pas quoi mettre ... 
 		 */
+		//potentiellement à faire dans gestionV
+		//changement de période. P3 me semble
+		//on recharge les voeux et on regarde les décisions de l'étudiant
+		//si il y a un OUI, on vire les autres candidatures
+		// OUI, mais : 
+		// NON, mais : 
+		//NON : on suppr sa candidature
 	}
 
 	@Override
-	public void enregistrerAnnuaire(String ior) {
+	public void enregistrerAnnuaire(String ior) { // WTF ??? 
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void ajouterListeRejet(Voeu c) throws voeuNonTrouve {
+	public void ajouterListeRejet(Voeu c) throws voeuNonTrouve { // intérêt d'avoir une liste refus ? pourquoi ne pas clore direct le voeu ?
 		if (!listeCandidatures.contains(c)){
 			throw new voeuNonTrouve();
 		}
@@ -116,11 +122,11 @@ public class IUniversiteImpl extends IUniversitePOA{
 
 	@Override
 	public Note[] getNotes(Etudiant idE) throws EtudiantNonTrouve{
-		if (listeNotesEtudiants.contains(idE)){
+		if (listeNotesEtudiants.contains(idE.noEtu)){
 			throw new EtudiantNonTrouve();
 		}
 		else {
-			return listeNotesEtudiants.get(idE);
+			return listeNotesEtudiants.get(idE.noEtu);
 		}
 	}
 
@@ -302,7 +308,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 				else{ 
 					ne=NiveauEtude.master;
 				}
-				Diplome d = new Diplome(numDipPR, nomDipPR, ne);
+				Diplome d = new Diplome(nomDipPR, ne);
 				diplomes[cpteur] = d;
 				cpteur++;
 				

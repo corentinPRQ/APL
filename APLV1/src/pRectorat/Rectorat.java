@@ -8,11 +8,6 @@ package pRectorat;
 public final class Rectorat implements org.omg.CORBA.portable.IDLEntity
 {
     /**
-     * Struct member noRec
-     */
-    public String noRec;
-
-    /**
      * Struct member nomAcademie
      */
     public String nomAcademie;
@@ -25,12 +20,10 @@ public final class Rectorat implements org.omg.CORBA.portable.IDLEntity
 
     /**
      * Constructor with fields initialization
-     * @param noRec noRec struct member
      * @param nomAcademie nomAcademie struct member
      */
-    public Rectorat(String noRec, String nomAcademie)
+    public Rectorat(String nomAcademie)
     {
-        this.noRec = noRec;
         this.nomAcademie = nomAcademie;
     }
 

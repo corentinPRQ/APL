@@ -15,9 +15,17 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Properties;
 
+import org.omg.CORBA.ORB;
+import org.omg.CosNaming.NamingContext;
+
 import Applications.PeriodeApplication;
+import ClientsServeurs.ClientGestionVoeuxUniversite;
 
 public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
+	private static org.omg.CORBA.ORB orb;
+	private static NamingContext nameRoot;
+	private static String nomObj;
+	
 	
 	private Hashtable<String, Voeu[]> listeVoeux;
 	private Hashtable<String,String[]> listeAccreditation;
@@ -25,8 +33,12 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	private Hashtable<String,String> listeUtilisateurs;
 	
 	//constructeur par défaut
-	public IGestionVoeuxImpl(){
+	public IGestionVoeuxImpl(ORB orb, NamingContext nameRoot, String nomObj){
 		//Liste d'accréditation à charger avec un fichier
+		this.orb = orb;
+		this.nameRoot = nameRoot;
+		this.nomObj = nomObj;
+		
 		listeAccreditation = new Hashtable<String, String[]>();
 		listeVoeux = new Hashtable<String, Voeu[]>();
 		listeUtilisateurs = new Hashtable<String,String>();
@@ -100,13 +112,16 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 
 	
 	private void validerVoeu(Voeu v) throws VoeuNonTrouve {
+		String idObj = "Midi-Pyrenees_Gestion";
+		ClientGestionVoeuxUniversite cu = new ClientGestionVoeuxUniversite(orb, nameRoot, nomObj, idObj);
 		
 		boolean prerequisOK=false;
-		//String dipV = v.acreditation.noD;
-		String[]PR = {""}; //TODO appel à la méthode getPrérequis de université avec en param l'intitulé de la formation 
+		String dipV = v.acreditation.libelleD;
+		//appel à la méthode getPrérequis de université avec en param l'intitulé de la formation
+		Diplome[] pr = cu.getListePrerequis(dipV); 
 		String formaEtu = ""; //TODO récupérer la formation du mec
-		for(int i=0; i<PR.length; i++){
-			if(PR[i].equals(formaEtu)){
+		for(int i=0; i<pr.length; i++){
+			if(pr[i].libelle.equals(formaEtu)){
 				prerequisOK=true;
 			}
 			break;
@@ -148,6 +163,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	}
 		
 
+	
 	public static void changerPeriode() {
 		//La méthode consiste en une MAJ du properties
 				Properties p;
@@ -186,14 +202,11 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 
 		
 	}
-
 			
 	@Override
 	public Voeu[] consulterListeVoeu(Etudiant etu) {
 		return listeVoeux.get(etu.noEtu);
 	}
-	
-
 
 	/**
 	 * Permet d'enregistrer un voeu dans la liste des voeux
@@ -224,8 +237,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 			this.listeVoeux.put(v.noE, tabV);
 		}else{
 			System.out.println("Déjà 5 voeux ont été fait");
-		}
-		
+		}	
 	}
 	
 	private void initialiserUsers(String path){
@@ -343,9 +355,8 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	
 	public static void main (String [] args){
 		System.out.println("Debut du test");
-	    IGestionVoeuxImpl igV=new IGestionVoeuxImpl();
+	    IGestionVoeuxImpl igV=new IGestionVoeuxImpl(orb, nameRoot, nomObj);
 	    igV.afficherAccred();
 		
 	}
-
 }

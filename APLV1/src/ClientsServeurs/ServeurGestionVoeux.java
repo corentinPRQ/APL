@@ -41,7 +41,7 @@ public class ServeurGestionVoeux implements Runnable {
 
 			// Creation du servant
 			//*********************
-			IGestionVoeuxImpl monGV = new IGestionVoeuxImpl();
+			IGestionVoeuxImpl monGV = new IGestionVoeuxImpl(orb, nameRoot, nomObj);
 
 			// Activer le servant au sein du POA et recuperer son ID
 			byte[] monUnivId = rootPOA.activate_object(monGV);
