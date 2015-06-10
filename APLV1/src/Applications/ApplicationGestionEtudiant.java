@@ -70,9 +70,9 @@ public class ApplicationGestionEtudiant {
 			/*initialiserEtudiant("src/usersEtu.csv");
 			IHM_Etudiant ihmE = new IHM_Etudiant(listeVoeux, listeEtudiants);*/
 			
-        	Thread tcli = new Thread(cEgv);
+        	Thread tcli = new Thread(ce);
 			
-			IHM_Etudiant ihmEtu = new IHM_Etudiant(cEgv);
+			IHM_Etudiant ihmEtu = new IHM_Etudiant(ce);
 			
             tcli.start();
 

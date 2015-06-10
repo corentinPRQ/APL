@@ -18,24 +18,15 @@ import ClientsServeurs.ClientEtudiantGV;
 public class ConnexionEtudiant extends javax.swing.JFrame {
 	
 	private static IHM_Etudiant parent;
-<<<<<<< HEAD
+	//private static Hashtable<String, String> listeEtudiants;
 	private static ClientEtudiantGV clientEtuGV;
-=======
-	private static Hashtable<String, String> listeEtudiants;
-
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
     /**
      * Creates new form ConnexionEtudiant
      */
-<<<<<<< HEAD
     public ConnexionEtudiant(IHM_Etudiant pParent, ClientEtudiantGV pCliEtuGV) {
     	parent = pParent;
     	ConnexionEtudiant.clientEtuGV = pCliEtuGV;
-=======
-    public ConnexionEtudiant(IHM_Etudiant parent, Hashtable<String, String> lesEtu) {
-    	parent = parent;
-    	listeEtudiants = lesEtu;
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
+    	//listeEtudiants = lesEtu;
         initComponents();
     }
 
@@ -133,7 +124,6 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
 
     private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) throws EtudiantNonTrouve {//GEN-FIRST:event_bt_connexionActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
     	if (ConnexionEtudiant.clientEtuGV.identifier(this.tf_numEtu.getText(),this.tf_mdp.getText()))
     	{
     		this.setVisible(false);
@@ -141,15 +131,6 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
     		this.parent.setEnabled(true);
     	}
     	
-=======
-    	if (listeEtudiants.containsKey(lb_numEtu.getText())){
-    		if (listeEtudiants.get(lb_numEtu.getText())==lb_mdp.getText()){
-    			parent.setVisible(true);
-    		}
-    	}
-//    	ConnexionEtudiant.this.parent.setEnabled(true);
-    	this.setVisible(false);
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
     	   
     	
     	
@@ -191,11 +172,7 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-<<<<<<< HEAD
                 new ConnexionEtudiant(parent,clientEtuGV).setVisible(true);
-=======
-                new ConnexionEtudiant(parent, listeEtudiants).setVisible(true);
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
             }
         });
     }

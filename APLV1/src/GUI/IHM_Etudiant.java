@@ -18,29 +18,29 @@ import ClientsServeurs.ClientEtudiantGV;
  * @author guilhem
  */
 public class IHM_Etudiant extends javax.swing.JFrame {
-<<<<<<< HEAD
+
 	private static ClientEtudiantGV clientEtuGV;
 
-=======
+
 	private ApplicationGestionEtudiant applicationGE;
 	private static ArrayList<Voeu> listeVoeux;
 	private static Hashtable<String, String> listeEtudiants;
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
+
     /**
      * Creates new form IHM_Etudiant
      */
-<<<<<<< HEAD
+
     public IHM_Etudiant(ClientEtudiantGV pCliEtGV) {
     	IHM_Etudiant.clientEtuGV = pCliEtGV;
     	ConnexionEtudiant coE = new ConnexionEtudiant(this,pCliEtGV);
     	coE.setVisible(true);
     	this.setEnabled(false);
-=======
-    public IHM_Etudiant(ArrayList<Voeu> lesVoeux, Hashtable<String, String> lesEtus) {
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
+    }
+
+   /* public IHM_Etudiant(ArrayList<Voeu> lesVoeux, Hashtable<String, String> lesEtus) {
+
         initComponents();
-<<<<<<< HEAD
-=======
+
         
     	ConnexionEtudiant coE = new ConnexionEtudiant(this, listeEtudiants);
     	listeVoeux = lesVoeux;
@@ -54,8 +54,8 @@ public class IHM_Etudiant extends javax.swing.JFrame {
         	//afficher les voeux dans le tableau
         	
         }
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
-    }
+
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -236,11 +236,11 @@ public class IHM_Etudiant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-<<<<<<< HEAD
+
                 new IHM_Etudiant(clientEtuGV).setVisible(true);
-=======
-                new IHM_Etudiant(listeVoeux, listeEtudiants).setVisible(true);
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
+
+                //new IHM_Etudiant(listeVoeux, listeEtudiants).setVisible(true);
+
             }
         });
     }

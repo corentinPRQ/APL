@@ -365,7 +365,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	    
 	    igV.afficherAccred();
 	    
-	     try {
+	 //    try {
 	// igV.validerVoeu(new Voeu("v1", "e1", new Accred("a1", "dip1", "lib1"),
 	// new Rectorat("midi-pyrenees"), DecisionEtudiant.oui,
 	// Etat.liste_principale));
@@ -376,3 +376,4 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 		
 	}
 }
+	
