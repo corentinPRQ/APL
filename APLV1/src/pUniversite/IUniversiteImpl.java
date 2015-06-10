@@ -45,7 +45,6 @@ public class IUniversiteImpl extends IUniversitePOA{
 	}
 
 
-	@Override
 	public boolean identifier(String login, String mdp) throws universitaireNonTrouve {
 		if (!listeUtilisateurs.contains(login)) {
 			//mettre un code GUI pour notifier de l'erreur d'identification
@@ -59,19 +58,21 @@ public class IUniversiteImpl extends IUniversitePOA{
 		return true;
 	}
 
-	@Override
-	public Voeu getCandidatures() { //Elle est appelée où et quand cette méthode ? A sortir de l'IDL à mon avis. WTF le return 1 voeu ?
-		//Chargement des voeux dans la liste des candidatures. --> dans ce cas c'est un appel à getVoeux de gestV
+	public Voeu getCandidatures() { //changer le type de retour -> tab VOeu
+		// méthode appelée par l'universitaire pour consulter les listes de voeux après décisions des étudiants
+		// appel à la méthode getVoeux de gestionVoeux
+		// Appel à la méthode majListe pour mettre à jour les listes en fonction des décisions des étudiants
+		// Retourne les listes mises à jour
 		return null;
 	}
 
-	@Override
-	public void enregistrerEtatCandidature(Voeu c, Etat e) throws voeuNonTrouve {
-		// Appel de setEtatVoeu dans Voeu normalement	
+	public void enregistrerEtatCandidature(Voeu c, Etat e) throws voeuNonTrouve {  //interne vu que appelée par l'universitaire
+		// Méthode appelée par l'universitaire quand il a mis à jour le voeu
+		// fait appel à setEtatVoeu de gestionVoeux
+		// appel à ajouter liste principale ou secondaire
 	}
 
-	@Override
-	public void ajouterListePrincipale(Voeu c) throws voeuNonTrouve {
+	public void ajouterListePrincipale(Voeu c) throws voeuNonTrouve { // méthode appelée en interne donc à sortir de l'IDL
 		if (!listeCandidatures.contains(c)){
 			throw new voeuNonTrouve();
 		}
@@ -80,8 +81,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 		}
 	}
 
-	@Override
-	public void ajouterListeComplementaire(Voeu c) throws voeuNonTrouve {
+	public void ajouterListeComplementaire(Voeu c) throws voeuNonTrouve { // méthode appelée en interne donc à sortir de l'IDL
 		if (!listeCandidatures.contains(c)){
 			throw new voeuNonTrouve();
 		}
@@ -90,12 +90,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 		}
 	}
 
-	@Override
 	public void majListes() { //TODO à sortir de l'IDL
-		/* 
-		 * Là par contre je sais pas quoi mettre ... 
-		 */
-		//potentiellement à faire dans gestionV
 		//changement de période. P3 me semble
 		//on recharge les voeux et on regarde les décisions de l'étudiant
 		//si il y a un OUI, on vire les autres candidatures
@@ -104,14 +99,12 @@ public class IUniversiteImpl extends IUniversitePOA{
 		//NON : on suppr sa candidature
 	}
 
-	@Override
-	public void enregistrerAnnuaire(String ior) { // WTF ??? 
+	public void enregistrerAnnuaire(String ior) { // sortir IDL
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void ajouterListeRejet(Voeu c) throws voeuNonTrouve { // intérêt d'avoir une liste refus ? pourquoi ne pas clore direct le voeu ?
+	public void ajouterListeRejet(Voeu c) throws voeuNonTrouve { // intérêt d'avoir une liste refus ? pourquoi ne pas clore direct le voeu ? + interne
 		if (!listeCandidatures.contains(c)){
 			throw new voeuNonTrouve();
 		}
@@ -121,7 +114,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 	}
 
 	@Override
-	public Note[] getNotes(Etudiant idE) throws EtudiantNonTrouve{
+	public Note[] getNotes(Etudiant idE) throws EtudiantNonTrouve{ // pour exam candidatures pour une autre univ
 		if (listeNotesEtudiants.contains(idE.noEtu)){
 			throw new EtudiantNonTrouve();
 		}
@@ -130,6 +123,9 @@ public class IUniversiteImpl extends IUniversitePOA{
 		}
 	}
 
+	/**
+	 * Renvoie les diplomes pré-requis pour postuler à un diplome
+	 */
 	@Override
 	public Diplome[] getListePrerequis(String diplome) {
 		System.out.println("Taille de la hashtable : " + preRequis.size());
@@ -178,6 +174,10 @@ public class IUniversiteImpl extends IUniversitePOA{
 		}
 	}
 	
+	/**
+	 * Permet de charger les notes d'un étudiant
+	 * @param path
+	 */
 	private void initialiserNotesEtudiant(String path){
 		String lineRead;
 		String[] lineSplit;
@@ -238,7 +238,10 @@ public class IUniversiteImpl extends IUniversitePOA{
 		
 	}
 	
-	
+	/**
+	 * Permet de charger les formations pré-requis
+	 * @param path
+	 */
 	private void initialiserPrerequis(String path) {
 		/*
 		 * Réfléchir à un moyen d'intégrer les notes pour les prérequis! 
