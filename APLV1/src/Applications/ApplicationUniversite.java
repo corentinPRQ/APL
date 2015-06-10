@@ -44,8 +44,8 @@ public class ApplicationUniversite {
 
 			// Saisie du nom de l'objet
 			System.out.println("Quel objet Corba voulez-vous contacter ?");
-			//Cas d'une connexion avec un Ministere : 
-			String idObj = "Ministere";
+			//Cas d'une connexion avec un GestionVoeux : 
+			String idObj = "Midi_Pyrenees_Gestion";
 			// Construction du Client spécifique à l'action à faire
 			System.out.println("Sous quel nom voulez-vous enregistrer l'objet Corba Client ?");
 			String nomOb = "Client_PS_Gestion";

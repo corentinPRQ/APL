@@ -11,10 +11,12 @@ import org.omg.CosNaming.NamingContext;
 
 import pRectorat.Accred;
 import pRectorat.DecisionEtudiant;
+import pRectorat.Etat;
 import pRectorat.Etudiant;
 import pRectorat.EtudiantNonTrouve;
 import pRectorat.IGestionVoeux;
 import pRectorat.IGestionVoeuxHelper;
+import pRectorat.Rectorat;
 import pRectorat.Voeu;
 import pRectorat.VoeuNonTrouve;
 
@@ -29,13 +31,14 @@ public class ClientEtudiantGV implements Runnable{
 	private HashMap<String, ArrayList<Voeu>> listeDeVoeux;
 
 	public ClientEtudiantGV(ORB orb, NamingContext nameRoot, String nomObj,
-			String idObj, JFrame parent) {
+			String idObj) {
 		super();
 		this.orb = orb;
 		this.nameRoot = nameRoot;
 		this.nomObj = nomObj;
 		this.idObj = idObj;
 		this.listeDeVoeux = new HashMap<String, ArrayList<Voeu>>();
+		travailler();
 	}
 	
 	public void travailler(){
@@ -49,12 +52,12 @@ public class ClientEtudiantGV implements Runnable{
 			System.out.println("Objet '" + this.idObj + "' trouve aupres du service de noms. IOR de l'objet :");
 			System.out.println(orb.object_to_string(distantObj));
 	
-			// Construction du nom a enregistrer
-//			org.omg.CosNaming.NameComponent[] nameToRegister = new org.omg.CosNaming.NameComponent[1];
-//			nameToRegister[0] = new org.omg.CosNaming.NameComponent(this.nomObj,"");
-			
 			// Récupération du nom de l'objet distant
-			this.monGestionVoeu = IGestionVoeuxHelper.narrow(distantObj);
+			
+			ClientEtudiantGV.monGestionVoeu = IGestionVoeuxHelper.narrow(distantObj);
+//			ClientEtudiantGV.monGestionVoeu.faireVoeu(new Voeu("1", "1", new Accred("1", "D1", "u1"), new Rectorat("mii"), DecisionEtudiant.oui_mais, Etat.cree));
+			ClientEtudiantGV.monGestionVoeu.getVoeux();
+//			System.out.println("GestionVoeu : " + this.monGestionVoeu);
 			
 		}
 		catch (Exception e) {
@@ -65,7 +68,7 @@ public class ClientEtudiantGV implements Runnable{
 	
 	public void faireVoeux(String idEtudiant, Accred pAccreditation, Voeu v){
 		try {
-			monGestionVoeu.faireVoeu(v);
+			ClientEtudiantGV.monGestionVoeu.faireVoeu(v);
 		} catch (VoeuNonTrouve e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +80,7 @@ public class ClientEtudiantGV implements Runnable{
 
 	public void repondreProposition(DecisionEtudiant pDecision, Voeu v){
 		try {
-			monGestionVoeu.repondreVoeu(pDecision, v);
+			ClientEtudiantGV.monGestionVoeu.repondreVoeu(pDecision, v);
 		} catch (VoeuNonTrouve e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,11 +88,17 @@ public class ClientEtudiantGV implements Runnable{
 	}
 	
 	public void consulterListeVoeux(Etudiant etu){
-		monGestionVoeu.consulterListeVoeu(etu);
+		ClientEtudiantGV.monGestionVoeu.consulterListeVoeu(etu);
 	}
 	
 	public void getListeAccreditation(Etudiant etu){
-		monGestionVoeu.getListeAccreditations();
+		ClientEtudiantGV.monGestionVoeu.getListeAccreditations();
+	}
+	
+	public Voeu[] getVoeux(){
+		System.out.println("getVoeux du clientEtudiantGV");
+		return (ClientEtudiantGV.monGestionVoeu.getVoeux());
+	
 	}
 	
 	public static void main(String args[]) {

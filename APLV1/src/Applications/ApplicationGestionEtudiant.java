@@ -1,24 +1,33 @@
 package Applications;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.NamingContext;
 
-import ClientsServeurs.ClientGestionVoeuxMinistere;
+import pRectorat.Voeu;
+import pUniversite.Matiere;
+import pUniversite.Note;
+import ClientsServeurs.ClientEtudiantGV;
+import GUI.IHM_Etudiant;
 
 public class ApplicationGestionEtudiant {
 	public static int noEtu = 0;
 	private static int idEtdu;
+	private static ArrayList<Voeu> listeVoeux;
+	//liste d'étudiants pour l'identification (nom, mdp)
+	private static Hashtable<String, String> listeEtudiants;
 
-//	public ApplicationGestionEtudiant(String login){
-//		String[] arguments = new String[2];
-//		arguments[0]=login;
-//		main(arguments);
-//	}
-	
-	
+	//	public ApplicationGestionEtudiant(String login){
+	//		String[] arguments = new String[2];
+	//		arguments[0]=login;
+	//		main(arguments);
+	//	}
+
+
 	public static void main(String[] args) {
 		try {
 			noEtu++;
@@ -37,17 +46,25 @@ public class ApplicationGestionEtudiant {
 			NamingContext nameRoot=org.omg.CosNaming.NamingContextHelper.narrow(orb.resolve_initial_references("NameService"));
 
 			// Saisie du nom de l'objet (si utilisation du service de nommage)
-			System.out.println("Quel objet Corba voulez-vous contacter ?");
-			//Cas d'une connexion avec un Ministere : 
+			System.out.println("Connexion avec le rectorat Midi-Pyrenees_GestionVoeu");
+			//Cas d'une connexion avec un GestionVoeux : 
 			String idObj = "Midi-Pyrenees_GestionVoeux";
 			// Construction du nom a enregistrer
-			String nomOb = "ClientEtudiantGV";
+			String nomObj = "ClientEtudiantGV";
 
 			System.out.println("lancement du client Etudiant");
-			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomOb, idObj);
-
-			Thread tcli = new Thread(cu);
-			tcli.start();
+			ClientEtudiantGV ce = new ClientEtudiantGV(orb, nameRoot, nomObj, idObj);
+			
+			Voeu[] lesVoeux = ce.getVoeux();
+			for (int i = 0; i<lesVoeux.length; i++){
+				if (Integer.parseInt(lesVoeux[i].noE) == idEtdu){
+					listeVoeux.add(lesVoeux[i]);
+				}
+			}
+			
+			initialiserEtudiant("src/usersEtu.csv");
+			IHM_Etudiant ihmE = new IHM_Etudiant(listeVoeux, listeEtudiants);
+			
 
 
 		} catch (InvalidName e) {
@@ -57,7 +74,42 @@ public class ApplicationGestionEtudiant {
 
 	}
 	
+	private static void initialiserEtudiant(String path){
+		String lineRead;
+		String[] lineSplit;
+		String login="";
+		String mdp="";
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(path));	 
+			lineRead = br.readLine();
+
+			while ((lineRead = br.readLine()) != null) {
+				lineSplit = lineRead.split(";",4);
+//				System.out.println("line split users : "+ lineSplit[0] + " - " + lineSplit[1] + " - " + lineSplit[2] + " - " +lineSplit[3]);
+				for (int i=0; i<lineSplit.length; i++){
+					switch(i){  
+					case 0: login = lineSplit[0];
+					break;
+					case 1: mdp = lineSplit[1];
+					break;
+					case 2 : 
+						break;
+					case 3 : 
+						break;
+					default : 
+						break;
+					}
+				}
+//				System.out.println("Login : "+login + " - mdp : "+mdp);
+				listeEtudiants.put(login, mdp);
+			}
+
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
+
+}
 //	System.out.println("1 : Faire un voeux");
 //	System.out.println("2 : Consulter liste de voeux");
 //	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

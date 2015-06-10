@@ -53,6 +53,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 
 	public boolean identifier(String login, String mdp)
 			throws EtudiantNonTrouve {
+		System.out.println("Identification depuis le rectorat");
 		if (!listeUtilisateurs.contains(login)) {
 			// mettre un code GUI pour notifier de l'erreur d'identification
 			throw new EtudiantNonTrouve();
@@ -75,41 +76,41 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 	 */
 	@Override
 	public Voeu[] getVoeux() {
-		System.out.println("Entré dans le getVoeux de IGestionVoeuIMPL");
-		Voeu vt = new Voeu("tests", "0", new Accred(), new Rectorat(), null,
-				null);
-		Voeu[] lesVt = new Voeu[1];
-		lesVt[0] = vt;
-		return (lesVt);
+//		System.out.println("Entré dans le getVoeux de IGestionVoeuIMPL");
+//		Voeu vt = new Voeu("tests", "0", new Accred(), new Rectorat(), null,
+//				null);
+//		Voeu[] lesVt = new Voeu[1];
+//		lesVt[0] = vt;
+//		return (lesVt);
 		
 		
-//		Collection<Voeu[]> colV = this.listeVoeux.values();
-//		int taille = colV.size();
-//		// on crée un tableau de voeux en fonction de la taille max potentielle
-//		Voeu[] tabV = new Voeu[5 * taille];
-//		int i = 0;
-//		Iterator<Voeu[]> itV = colV.iterator();
-//		// On parcourt la collection de Voeu[5] de la HM
-//		while (itV.hasNext()) {
-//			Voeu[] tabVTmp = new Voeu[5];
-//			tabVTmp = itV.next();
-//			// on parcourt les 5 voeux potentiel
-//			for (int j = 0; tabVTmp[j] != null && j < tabVTmp.length; j++) {
-//				tabV[i] = tabVTmp[j];
-//				i++;
-//			}
-//		}
-//
-//		if (tabV.length != 0) {
-//			System.out.println(tabV.length);
-//			return tabV;
-//		} else {
-//			Voeu v = new Voeu("listeVide", "0", new Accred(), new Rectorat(), null,
-//					null);
-//			Voeu[] lesV = new Voeu[1];
-//			lesV[0] = v;
-//			return (lesV);
-//		}
+		Collection<Voeu[]> colV = this.listeVoeux.values();
+		int taille = colV.size();
+		// on crée un tableau de voeux en fonction de la taille max potentielle
+		Voeu[] tabV = new Voeu[5 * taille];
+		int i = 0;
+		Iterator<Voeu[]> itV = colV.iterator();
+		// On parcourt la collection de Voeu[5] de la HM
+		while (itV.hasNext()) {
+			Voeu[] tabVTmp = new Voeu[5];
+			tabVTmp = itV.next();
+			// on parcourt les 5 voeux potentiel
+			for (int j = 0; tabVTmp[j] != null && j < tabVTmp.length; j++) {
+				tabV[i] = tabVTmp[j];
+				i++;
+			}
+		}
+
+		if (tabV.length != 0) {
+			System.out.println(tabV.length);
+			return tabV;
+		} else {
+			Voeu v = new Voeu("listeVide", "0", new Accred(), new Rectorat(), null,
+					null);
+			Voeu[] lesV = new Voeu[1];
+			lesV[0] = v;
+			return (lesV);
+		}
 
 	}
 

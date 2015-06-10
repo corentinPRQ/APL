@@ -6,9 +6,7 @@
 
 package GUI;
 
-import javax.swing.JFrame;
-
-import org.apache.xerces.dom.ParentNode;
+import java.util.Hashtable;
 
 /**
  *
@@ -17,12 +15,14 @@ import org.apache.xerces.dom.ParentNode;
 public class ConnexionEtudiant extends javax.swing.JFrame {
 	
 	private static IHM_Etudiant parent;
+	private static Hashtable<String, String> listeEtudiants;
 
     /**
      * Creates new form ConnexionEtudiant
      */
-    public ConnexionEtudiant(IHM_Etudiant parent) {
+    public ConnexionEtudiant(IHM_Etudiant parent, Hashtable<String, String> lesEtu) {
     	parent = parent;
+    	listeEtudiants = lesEtu;
         initComponents();
     }
 
@@ -115,7 +115,12 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
 
     private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_connexionActionPerformed
         // TODO add your handling code here:
-    	ConnexionEtudiant.this.parent.setVisible(true);
+    	if (listeEtudiants.containsKey(lb_numEtu.getText())){
+    		if (listeEtudiants.get(lb_numEtu.getText())==lb_mdp.getText()){
+    			parent.setVisible(true);
+    		}
+    	}
+//    	ConnexionEtudiant.this.parent.setEnabled(true);
     	this.setVisible(false);
     	   
     	
@@ -158,7 +163,7 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConnexionEtudiant(parent).setVisible(true);
+                new ConnexionEtudiant(parent, listeEtudiants).setVisible(true);
             }
         });
     }
