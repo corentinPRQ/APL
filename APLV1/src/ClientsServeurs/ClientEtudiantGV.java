@@ -52,11 +52,12 @@ public class ClientEtudiantGV implements Runnable{
 			System.out.println("Objet '" + this.idObj + "' trouve aupres du service de noms. IOR de l'objet :");
 			System.out.println(orb.object_to_string(distantObj));
 	
-			// Récupération du nom de l'objet distant
+			// Construction du nom a enregistrer
+			org.omg.CosNaming.NameComponent[] nameToRegister = new org.omg.CosNaming.NameComponent[1];
+			nameToRegister[0] = new org.omg.CosNaming.NameComponent(this.nomObj,"");
 			
+			// Récupération du nom de l'objet distant
 			ClientEtudiantGV.monGestionVoeu = IGestionVoeuxHelper.narrow(distantObj);
-//			ClientEtudiantGV.monGestionVoeu.faireVoeu(new Voeu("1", "1", new Accred("1", "D1", "u1"), new Rectorat("mii"), DecisionEtudiant.oui_mais, Etat.cree));
-//			System.out.println("GestionVoeu : " + this.monGestionVoeu);
 			
 		}
 		catch (Exception e) {
@@ -87,12 +88,18 @@ public class ClientEtudiantGV implements Runnable{
 	}
 	
 	public Voeu[] consulterListeVoeux(Etudiant etu){
+		//ClientEtudiantGV.monGestionVoeu.consulterListeVoeu(etu);
 		System.out.println("getVoeux du clientEtudiantGV");
 		return (ClientEtudiantGV.monGestionVoeu.consulterListeVoeu(etu));
 	}
 	
 	public void getListeAccreditation(Etudiant etu){
 		ClientEtudiantGV.monGestionVoeu.getListeAccreditations();
+	}
+	
+	public boolean identifier(String login, String mdp) throws EtudiantNonTrouve{
+		System.out.println(login + " - " +mdp );
+		return ClientEtudiantGV.monGestionVoeu.identifier(login, mdp);
 	}
 	
 	public Voeu[] getVoeux(){
@@ -116,6 +123,7 @@ public class ClientEtudiantGV implements Runnable{
 			// Construction du nom a enregistrer
 			String nomObj = "Midi-Pyrenees_GVC";
 			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomObj, idObj);
+			
 			cu.travailler();
 			
 		} catch (InvalidName e) {

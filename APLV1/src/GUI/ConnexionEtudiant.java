@@ -8,6 +8,9 @@ package GUI;
 
 import java.util.Hashtable;
 
+import pRectorat.EtudiantNonTrouve;
+import ClientsServeurs.ClientEtudiantGV;
+
 /**
  *
  * @author guilhem
@@ -47,14 +50,19 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
 
         lb_titre.setText("CONNEXION");
 
-        lb_numEtu.setText("NumÃ©ro Ã©tudiant");
+        lb_numEtu.setText("Numéro étudiant");
 
         lb_mdp.setText("Mot de passe");
 
         bt_connexion.setText("Se connecter");
         bt_connexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_connexionActionPerformed(evt);
+                try {
+					bt_connexionActionPerformed(evt);
+				} catch (EtudiantNonTrouve e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -113,20 +121,24 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_connexionActionPerformed
+    private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) throws EtudiantNonTrouve {//GEN-FIRST:event_bt_connexionActionPerformed
         // TODO add your handling code here:
-    	if (listeEtudiants.containsKey(lb_numEtu.getText())){
-    		if (listeEtudiants.get(lb_numEtu.getText())==lb_mdp.getText()){
-    			parent.setVisible(true);
-    		}
+    	if (ConnexionEtudiant.clientEtuGV.identifier(this.tf_numEtu.getText(),this.tf_mdp.getText()))
+    	{
+    		this.setVisible(false);
+    		this.parent.setVisible(true);
+    		this.parent.setEnabled(true);
     	}
-//    	ConnexionEtudiant.this.parent.setEnabled(true);
-    	this.setVisible(false);
+    	
+    	   
+    	
+    	
     }//GEN-LAST:event_bt_connexionActionPerformed
 
     private void bt_quitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_quitterActionPerformed
         // TODO add your handling code here:
  
+
     }//GEN-LAST:event_bt_quitterActionPerformed
 
     /**
@@ -159,7 +171,7 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConnexionEtudiant(parent, listeEtudiants).setVisible(true);
+                new ConnexionEtudiant(parent,clientEtuGV).setVisible(true);
             }
         });
     }

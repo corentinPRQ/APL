@@ -11,20 +11,36 @@ import java.util.Hashtable;
 
 import pRectorat.Voeu;
 import Applications.ApplicationGestionEtudiant;
+import ClientsServeurs.ClientEtudiantGV;
 
 /**
  *
  * @author guilhem
  */
 public class IHM_Etudiant extends javax.swing.JFrame {
+
+	private static ClientEtudiantGV clientEtuGV;
+
+
 	private ApplicationGestionEtudiant applicationGE;
 	private static ArrayList<Voeu> listeVoeux;
 	private static Hashtable<String, String> listeEtudiants;
+
     /**
      * Creates new form IHM_Etudiant
      */
-    public IHM_Etudiant(ArrayList<Voeu> lesVoeux, Hashtable<String, String> lesEtus) {
+
+    public IHM_Etudiant(ClientEtudiantGV pCliEtGV) {
+    	IHM_Etudiant.clientEtuGV = pCliEtGV;
+    	ConnexionEtudiant coE = new ConnexionEtudiant(this,pCliEtGV);
+    	coE.setVisible(true);
+    	this.setEnabled(false);
+    }
+
+   /* public IHM_Etudiant(ArrayList<Voeu> lesVoeux, Hashtable<String, String> lesEtus) {
+
         initComponents();
+
         
     	ConnexionEtudiant coE = new ConnexionEtudiant(this, listeEtudiants);
     	listeVoeux = lesVoeux;
@@ -39,7 +55,8 @@ public class IHM_Etudiant extends javax.swing.JFrame {
         	//afficher les voeux dans le tableau
         	
         }
-    }
+
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -220,7 +237,11 @@ public class IHM_Etudiant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IHM_Etudiant(listeVoeux, listeEtudiants).setVisible(true);
+
+                new IHM_Etudiant(clientEtuGV).setVisible(true);
+
+                //new IHM_Etudiant(listeVoeux, listeEtudiants).setVisible(true);
+
             }
         });
     }

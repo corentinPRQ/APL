@@ -76,7 +76,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 	 */
 	@Override
 	public Voeu[] getVoeux() {
-		System.out.println("Entré dans le getVoeux de IGestionVoeuIMPL");
+		
 		
 		Collection<Voeu[]> colV = this.listeVoeux.values();
 		int taille = colV.size();

@@ -65,8 +65,10 @@ public class ApplicationGestionEtudiant {
 					listeVoeux.add(lesVoeux[i]);
 				}
 			}
-			System.out.println("Taille des voeux récupérés : " + listeVoeux.size());
-			IHM_Etudiant ihmE = new IHM_Etudiant(listeVoeux, listeEtudiants);
+			
+        	Thread tcli = new Thread(ce);
+			
+			IHM_Etudiant ihmEtu = new IHM_Etudiant(ce);
 			
 		} catch (InvalidName e) {
 			// TODO Auto-generated catch block
