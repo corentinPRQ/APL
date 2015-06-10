@@ -29,12 +29,11 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 	private Hashtable<String, Voeu[]> listeVoeux;
 	private Hashtable<String, String[]> listeAccreditation;
 	private Accred[] lesAccred;
-<<<<<<< HEAD
-	private Hashtable<String,String> listeUtilisateurs;
+	private Hashtable<String,Etudiant> listeEtudiant;
 
-=======
-	private Hashtable<String, String> listeUtilisateurs;
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
+
+	
+
 	
 	//constructeur par défaut
 	public IGestionVoeuxImpl(ORB orb, NamingContext nameRoot, String nomObj){
@@ -45,8 +44,9 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 
 		listeAccreditation = new Hashtable<String, String[]>();
 		listeVoeux = new Hashtable<String, Voeu[]>();
-		listeUtilisateurs = new Hashtable<String, String>();
-		initialiserUsers("src/users.csv");
+		listeEtudiant=new Hashtable<String, Etudiant>();
+		
+		initialiserEtudiants("src/usersEtu.csv");
 		initialiserAccred("src/Accreditation.csv");
 	}
 
@@ -59,11 +59,12 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 	public boolean identifier(String login, String mdp)
 			throws EtudiantNonTrouve {
 		System.out.println("Identification depuis le rectorat");
-		if (!listeUtilisateurs.contains(login)) {
+		if (!listeEtudiant.containsKey(login)) {
 			// mettre un code GUI pour notifier de l'erreur d'identification
 			throw new EtudiantNonTrouve();
 		} else {
-			if (listeUtilisateurs.get(login).equals(mdp) == false) {
+			System.out.println(listeEtudiant.get(login).getMdp());
+			if (!listeEtudiant.get(login).getMdp().equals(mdp)) {
 				return false;
 			}
 		}
@@ -273,17 +274,19 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 		}
 	}
 
-	private void initialiserUsers(String path) {
+	private void initialiserEtudiants(String path) {
 		String lineRead;
 		String[] lineSplit;
 		String login = "";
 		String mdp = "";
+		String prenom="";
+		String nom="";
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(path));
 			lineRead = br.readLine();
 
 			while ((lineRead = br.readLine()) != null) {
-				lineSplit = lineRead.split(";", 4);
+				lineSplit = lineRead.split(";", 3);
 				// System.out.println("line split users : "+ lineSplit[0] +
 				// " - " + lineSplit[1] + " - " + lineSplit[2] + " - "
 				// +lineSplit[3]);
@@ -296,15 +299,16 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 						mdp = lineSplit[1];
 						break;
 					case 2:
+						nom=lineSplit[2];
 						break;
-					case 3:
-						break;
+
 					default:
 						break;
 					}
 				}
 				// System.out.println("Login : "+login + " - mdp : "+mdp);
-				this.listeUtilisateurs.put(login, mdp);
+				this.listeEtudiant.put(login, new Etudiant(login,nom,mdp));
+			
 			}
 
 		} catch (Exception e) {
@@ -387,6 +391,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 			e.printStackTrace();
 		}
 	}
+	
 
 	
 	public void afficherAccred(){
@@ -394,11 +399,31 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 			System.out.println(lesAccred[i].toString());
 		}
 	}
-
-	// public static void main (String [] args){
-	// System.out.println("Debut du test");
-	// IGestionVoeuxImpl igV=new IGestionVoeuxImpl(orb, nameRoot, nomObj);
-	//
+	
+	public void afficherLesEtu(){
+		Enumeration nb=listeEtudiant.elements();
+		 Object key;
+		 while(nb.hasMoreElements()) {
+		  key=nb.nextElement();
+		  Etudiant value=(Etudiant) key;
+		  System.out.println("cle = "+ key + "" + value.toString() );
+		 }
+	}
+	
+	@Override
+	public Etudiant getUtilisateur(String numeroEtudiant)
+			throws EtudiantNonTrouve {
+		
+		System.out.println(listeEtudiant.get(numeroEtudiant));
+		return(listeEtudiant.get(numeroEtudiant));
+	}
+	 public static void main (String [] args) throws EtudiantNonTrouve{
+	 System.out.println("Debut du test");
+	 IGestionVoeuxImpl igV=new IGestionVoeuxImpl(orb, nameRoot, nomObj);
+	 igV.afficherLesEtu();
+	 System.out.println(igV.identifier("21001324", "hugo"));
+	 
+	 System.out.println(igV.getUtilisateur("21001324").getNom());
 	// try {
 	// igV.validerVoeu(new Voeu("v1", "e1", new Accred("a1", "dip1", "lib1"),
 	// new Rectorat("midi-pyrenees"), DecisionEtudiant.oui,
@@ -409,4 +434,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 	// }
 	//
 	// }
+}
+
+	
 }

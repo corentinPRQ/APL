@@ -58,20 +58,19 @@ public class ApplicationGestionEtudiant {
 			System.out.println("lancement du client Etudiant");
 			ClientEtudiantGV ce = new ClientEtudiantGV(orb, nameRoot, nomObj, idObj);
 			
-			Voeu[] lesVoeux = ce.consulterListeVoeux(new Etudiant("1", "Melet"));
+			/*Voeu[] lesVoeux = ce.consulterListeVoeux(new Etudiant("1", "Melet"));
 
 			for (int i = 0; i<lesVoeux.length; i++){
 				if (Integer.parseInt(lesVoeux[i].noE) == idEtdu){
 					listeVoeux.add(lesVoeux[i]);
 				}
-			}
-<<<<<<< HEAD
+			}*/
+
 			
 			
 			/*initialiserEtudiant("src/usersEtu.csv");
 			IHM_Etudiant ihmE = new IHM_Etudiant(listeVoeux, listeEtudiants);*/
-=======
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
+
 			
         	Thread tcli = new Thread(ce);
 			
@@ -82,7 +81,7 @@ public class ApplicationGestionEtudiant {
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
+
 	
 	/*private static void initialiserEtudiant(String path){
 		String lineRead;
@@ -119,8 +118,7 @@ public class ApplicationGestionEtudiant {
 		}
 	}*/
 
-=======
->>>>>>> branch 'master' of https://github.com/corentinPRQ/APL
+
 }
 //	System.out.println("1 : Faire un voeux");
 //	System.out.println("2 : Consulter liste de voeux");

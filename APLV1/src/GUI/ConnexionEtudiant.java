@@ -8,7 +8,9 @@ package GUI;
 
 import java.util.Hashtable;
 
+import pRectorat.Etudiant;
 import pRectorat.EtudiantNonTrouve;
+import pRectorat.Voeu;
 import ClientsServeurs.ClientEtudiantGV;
 
 /**
@@ -24,8 +26,8 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
     /**
      * Creates new form ConnexionEtudiant
      */
-    public ConnexionEtudiant(IHM_Etudiant parent, ClientEtudiantGV client) {
-    	parent = parent;
+    public ConnexionEtudiant(IHM_Etudiant pParent, ClientEtudiantGV client) {
+    	parent = pParent;
     	ConnexionEtudiant.clientEtuGV = client;
         initComponents();
     }
@@ -129,6 +131,13 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
     		this.setVisible(false);
     		this.parent.setVisible(true);
     		this.parent.setEnabled(true);
+    		Etudiant etu = ConnexionEtudiant.clientEtuGV.getEtudiant(this.tf_numEtu.getText());
+    		this.parent.utilisateur=etu;
+    		this.parent.setLb_nomEtud(this.parent.utilisateur.getNom());
+    		Voeu[] lesvoeux=ConnexionEtudiant.clientEtuGV.consulterListeVoeux(etu);
+    		this.parent.remplirTableVoeu(lesvoeux);
+    	
+    		
     	}
     	
     	   

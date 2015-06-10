@@ -78,7 +78,6 @@ public class ClientEtudiantGV implements Runnable{
 		}
 	}
 	
-//	public Voeu[]
 
 	public void repondreProposition(DecisionEtudiant pDecision, Voeu v){
 		try {
@@ -101,13 +100,19 @@ public class ClientEtudiantGV implements Runnable{
 	
 	public boolean identifier(String login, String mdp) throws EtudiantNonTrouve{
 		System.out.println(login + " - " +mdp );
+		
 		return ClientEtudiantGV.monGestionVoeu.identifier(login, mdp);
+		
 	}
 	
 	public Voeu[] getVoeux(){
 		System.out.println("getVoeux du clientEtudiantGV");
 		return (ClientEtudiantGV.monGestionVoeu.getVoeux());
 	
+	}
+	
+	public Etudiant getEtudiant (String numEtudiant) throws EtudiantNonTrouve{
+		return (ClientEtudiantGV.monGestionVoeu.getUtilisateur(numEtudiant));
 	}
 	
 	public static void main(String args[]) {

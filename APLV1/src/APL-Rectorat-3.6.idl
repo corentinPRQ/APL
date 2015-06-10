@@ -40,6 +40,7 @@ module pRectorat {
 	struct Etudiant{
 		string noEtu;
 		string nom;
+		string mdp;
 	};
 	
 	struct Universite{
@@ -114,6 +115,9 @@ module pRectorat {
 
 		//Opération permettant de se connecter
 		boolean identifier(in string login,in string mdp)raises (EtudiantNonTrouve);
+
+		//Opération permettant de récuperer les utilisateur d'un étudiant
+		Etudiant getUtilisateur(in string numeroEtudiant)raises(EtudiantNonTrouve);
 	};
 };
 
