@@ -19,6 +19,7 @@ public class ConnexionEtudiant extends javax.swing.JFrame {
 	
 	private static IHM_Etudiant parent;
 	private static Hashtable<String, String> listeEtudiants;
+	
 
     /**
      * Creates new form ConnexionEtudiant

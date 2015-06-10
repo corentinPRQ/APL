@@ -47,4 +47,10 @@ public interface IGestionVoeuxOperations
     public void repondreVoeu(pRectorat.DecisionEtudiant pDecision, pRectorat.Voeu v)
         throws pRectorat.VoeuNonTrouve;
 
+    /**
+     * Operation identifier
+     */
+    public boolean identifier(String login, String mdp)
+        throws pRectorat.EtudiantNonTrouve;
+
 }

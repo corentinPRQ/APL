@@ -77,6 +77,8 @@ public class ClientEtudiantGV implements Runnable{
 			e.printStackTrace();
 		}
 	}
+	
+//	public Voeu[]
 
 	public void repondreProposition(DecisionEtudiant pDecision, Voeu v){
 		try {

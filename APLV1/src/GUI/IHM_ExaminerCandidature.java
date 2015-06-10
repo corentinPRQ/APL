@@ -44,11 +44,11 @@ public class IHM_ExaminerCandidature extends javax.swing.JFrame {
 
         lb_TitreInterface.setText("Examination d'une candidature");
 
-        lb_infoEtudiant.setText("Informations de l'Ã©tudiant");
+        lb_infoEtudiant.setText("Informations de l'étudiant");
 
         lb_NomEtudiant.setText("Nom :");
 
-        lb_UniversiteEtudiant.setText("UniversitÃ© :");
+        lb_UniversiteEtudiant.setText("Université :");
 
         tab_NotesEtudiants.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

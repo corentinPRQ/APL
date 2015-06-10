@@ -32,7 +32,7 @@ public class IHM_Rectorat extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        bt_changerPeriode.setText("Changer pÃ©riode");
+        bt_changerPeriode.setText("Changer période");
         bt_changerPeriode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_changerPeriodeActionPerformed(evt);
