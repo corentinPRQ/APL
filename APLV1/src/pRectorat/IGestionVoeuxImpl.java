@@ -21,6 +21,7 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	
 	private Hashtable<String, Voeu[]> listeVoeux;
 	private Hashtable<String,String[]> listeAccreditation;
+	private Accred[] lesAccred;
 	private Hashtable<String,String> listeUtilisateurs;
 	
 	//constructeur par défaut
@@ -54,7 +55,6 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 
 	@Override
 	public Accred[] getListeAccreditations() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -272,13 +272,14 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 		String[] lineSplit;
 		String Universite="";
 		String Diplome="";
+		String NoAccred="";
 
 		
 		//variable comptant le nombre de lignes du fichier par diplome
 		int cpteur = 0;
 		String DipPrecedent = "";
-		ArrayList<String> list = new ArrayList<String>();
-		String[] lesUniv;
+		ArrayList<Accred> listAccred = new ArrayList<Accred>();
+		
 	
 		
 		try {
@@ -286,19 +287,23 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 			lineRead = br.readLine();
 
 			while ((lineRead = br.readLine()) != null) {
-				lineSplit = lineRead.split(";",2);
+				lineSplit = lineRead.split(";",3);
 //				System.out.println("line split : "+ lineSplit[0] + " - " + lineSplit[1] + " - " + lineSplit[2] + " - " +lineSplit[3]);
 				for (int i=0; i<lineSplit.length; i++){
-					switch(i){  
-					case 0 : Diplome= lineSplit[0];
+					switch(i){ 
+					case 0 : NoAccred= lineSplit[0];
 					break;
-					case 1 : Universite = lineSplit[1];
+					case 1 : Diplome= lineSplit[1];
+					break;
+					case 2 : Universite = lineSplit[2];
 					break;
 					default : System.err.println("Erreur dans la lecture du fichier");
 					break;
 					}					
 				}
-				//si le numéro etudiant est différent du précédent c'est qu'on changé d'étudiant, donc on enregistre ses notes
+				listAccred.add(new Accred(NoAccred,Diplome,Universite));
+				
+				/*//si le numéro etudiant est différent du précédent c'est qu'on changé d'étudiant, donc on enregistre ses notes
 //				System.out.println("NumDIP : " + numDip + " - numDipPrecedent : " + numDipPrecedent);
 				if (!Diplome.equals(DipPrecedent)){
 					lesUniv = new String[list.size()];
@@ -312,13 +317,18 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 				DipPrecedent = Diplome;
 				
 				list.add(Universite);
+				*/
 				
 			}
-			lesUniv = new String[list.size()];
+			/*lesUniv = new String[list.size()];
 			for(int i=0;i<list.size();i++){
-				lesUniv[i]=list.get(i);
+				lesUniv[i]=list.get(i);*/
+			
+			//} this.listeAccreditation.put(Diplome, lesUniv);
+			this.lesAccred=new Accred[listAccred.size()];
+			for(int i=0;i<listAccred.size();i++){
+				lesAccred[i]=listAccred.get(i);
 			}
-			this.listeAccreditation.put(Diplome, lesUniv);
 
 		}catch (Exception e){
 			e.printStackTrace();
@@ -326,15 +336,8 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA{
 	}
 	
 	public void afficherAccred(){
-		Enumeration<String> enumKey = listeAccreditation.keys();
-		while(enumKey.hasMoreElements()) {
-		    String key = enumKey.nextElement();
-		    String[] val = listeAccreditation.get(key);
-		    System.out.println("Pour le diplome : "+key);
-		    System.out.println("Universite: ");
-		    for(int i=0;i<val.length;i++){
-		    	System.out.println(val[i]);
-		    }
+		for(int i = 0;i<lesAccred.length;i++){
+			System.out.println(lesAccred[i].toString());
 		}
 	}
 	

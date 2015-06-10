@@ -7,7 +7,13 @@ package pRectorat;
 */
 public final class Accred implements org.omg.CORBA.portable.IDLEntity
 {
-    /**
+    @Override
+	public String toString() {
+		return "Accred [noAccred=" + noAccred + ", libelleD=" + libelleD
+				+ ", libelleU=" + libelleU + "]";
+	}
+
+	/**
      * Struct member noAccred
      */
     public String noAccred;
