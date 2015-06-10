@@ -126,7 +126,8 @@ public class IUniversiteImpl extends IUniversitePOA{
 
 	@Override
 	public Diplome[] getListePrerequis(String diplome) {
-		if (preRequis.contains(diplome)){
+		System.out.println("Taille de la hashtable : " + preRequis.size());
+		if (preRequis.containsKey(diplome)){
 			return preRequis.get(diplome);
 		}
 		else{
@@ -252,6 +253,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 		//variable comptant le nombre de lignes du fichier par diplome
 		int cpteur = 0;
 		String numDipPrecedent = "";
+		String nomDipPrecedent = "";
 		NiveauEtude ne = null;
 		Diplome[] diplomes = new Diplome[10];
 		
@@ -271,6 +273,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 					case 2 : numDip = lineSplit[2];
 					break;
 					case 3 : nomDip = lineSplit[3];
+					System.out.println(nomDip);
 					break;
 					case 4 : numDipPR = lineSplit[4];
 					break;
@@ -289,12 +292,13 @@ public class IUniversiteImpl extends IUniversitePOA{
 				//si le numéro etudiant est différent du précédent c'est qu'on changé d'étudiant, donc on enregistre ses notes
 //				System.out.println("NumDIP : " + numDip + " - numDipPrecedent : " + numDipPrecedent);
 				if (!numDip.equals(numDipPrecedent)){
-					System.out.println("Enregistrement de " +cpteur+ " diplomes prerequis pour le diplome : " + numDipPrecedent +"\n\n");
-					this.preRequis.put(numDipPrecedent, diplomes);
+					System.out.println("Enregistrement de " +cpteur+ " diplomes prerequis pour le diplome : " + nomDipPrecedent +"\n\n");
+					this.preRequis.put(nomDipPrecedent, diplomes);
 					diplomes = new Diplome[10];
 					cpteur = 0;
 				}
 				numDipPrecedent = numDip;
+				nomDipPrecedent = nomDip;
 //				System.out.println("Diplome : "+numDip+"-"+nomDip + " - Diplome Préparé : "+numDipPR+"-"+nomDipPR +" - " );
 				if (nomDipPR.contains("L3")){
 					ne = NiveauEtude.licence;
@@ -307,8 +311,11 @@ public class IUniversiteImpl extends IUniversitePOA{
 				cpteur++;
 				
 			}
-			System.out.println("Enregistrement de " +cpteur+ " diplomes prerequis pour le diplome : " + numDipPrecedent +"\n\n");
-			this.preRequis.put(numDip, diplomes);
+			System.out.println("Enregistrement de " +cpteur+ " diplomes prerequis pour le diplome : " + nomDipPrecedent +"\n\n");
+			this.preRequis.put(nomDip, diplomes);
+			if (preRequis.containsKey("M1Miage")){
+				System.out.println("COUCOU");
+			}
 
 		}catch (Exception e){
 			e.printStackTrace();
@@ -317,8 +324,8 @@ public class IUniversiteImpl extends IUniversitePOA{
 
 	public static void main (String [] args){
 		IUniversiteImpl i = new IUniversiteImpl();
-		System.out.println(i.getListePrerequis("M1MIAGE"));
-		
+		System.out.println(i.getListePrerequis("M1Miage"));
+			
 	}
 
 
