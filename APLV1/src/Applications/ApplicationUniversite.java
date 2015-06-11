@@ -9,7 +9,9 @@ import org.omg.CosNaming.NamingContext;
 
 import pRectorat.Universite;
 import ClientsServeurs.ClientGestionVoeuxMinistere;
+import ClientsServeurs.ClientUniversiteGV;
 import ClientsServeurs.ServeurUniversite;
+import GUI.IHM_Universitaire;
 
 public class ApplicationUniversite {
 	public static int noUniv = 0;
@@ -50,11 +52,12 @@ public class ApplicationUniversite {
 			System.out.println("Sous quel nom voulez-vous enregistrer l'objet Corba Client ?");
 			String nomOb = "Client_PS_Gestion";
 			System.out.println("lancement du client Université");
-			ClientGestionVoeuxMinistere cu = new ClientGestionVoeuxMinistere(orb, nameRoot, nomOb, idObj);
-			Thread tcli = new Thread(cu);
-			tcli.start();
+			ClientUniversiteGV cu = new ClientUniversiteGV(orb, nameRoot, nomOb, idObj);
+//			Thread tcli = new Thread(cu);
+//			tcli.start();
 
-
+			IHM_Universitaire ihmU = new IHM_Universitaire(cu);
+			ihmU.setVisible(true);
 		} catch (InvalidName e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

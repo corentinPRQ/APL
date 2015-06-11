@@ -61,6 +61,7 @@ public class ClientGestionVoeuxUniversite implements Runnable{
 		monUniv.getCandidatures();
 	}
 	
+
 	public void majListes(){
 		monUniv.majListes();
 	}*/

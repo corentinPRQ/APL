@@ -6,6 +6,12 @@ package GUI;
  * and open the template in the editor.
  */
 
+import javax.swing.JOptionPane;
+
+import pUniversite.IUniversiteImpl;
+import pUniversite.universitaireNonTrouve;
+import ClientsServeurs.ClientEtudiantGV;
+import ClientsServeurs.ClientUniversiteGV;
 import GUI.*;
 
 /**
@@ -14,12 +20,19 @@ import GUI.*;
  */
 public class ConnexionUniversitaire extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ConnexionEtudiant
-     */
-    public ConnexionUniversitaire() {
+	private static IHM_Universitaire parent;
+	//private static Hashtable<String, String> listeEtudiants;
+	private static ClientUniversiteGV universite;
+
+	/**
+	 * Constructeur IHM de connexion d'un universitaire.
+	 * @param pParent
+	 * @param pCliUnivGV
+	 */
+    public ConnexionUniversitaire(IHM_Universitaire pParent, ClientUniversiteGV client) {
+    	parent = pParent;
+    	ConnexionUniversitaire.universite = client;
         initComponents();
-//        test
     }
 
     /**
@@ -32,7 +45,7 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
     private void initComponents() {
 
         lb_titre = new javax.swing.JLabel();
-        lb_numEtu = new javax.swing.JLabel();
+        lb_numUniv = new javax.swing.JLabel();
         lb_mdp = new javax.swing.JLabel();
         tf_numEtu = new javax.swing.JTextField();
         tf_mdp = new javax.swing.JTextField();
@@ -43,14 +56,19 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
 
         lb_titre.setText("CONNEXION");
 
-        lb_numEtu.setText("Identifiant universitaire");
+        lb_numUniv.setText("Login");
 
         lb_mdp.setText("Mot de passe");
 
         bt_connexion.setText("Se connecter");
         bt_connexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_connexionActionPerformed(evt);
+                try {
+					bt_connexionActionPerformed(evt);
+				} catch (universitaireNonTrouve e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -73,7 +91,7 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb_numEtu)
+                            .addComponent(lb_numUniv)
                             .addComponent(lb_mdp))
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -93,7 +111,7 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
                 .addComponent(lb_titre)
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_numEtu)
+                    .addComponent(lb_numUniv)
                     .addComponent(tf_numEtu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -109,13 +127,30 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_connexionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_connexionActionPerformed
+    /**
+     * Btn de connexion d'un universitaire
+     * @param evt
+     * @throws universitaireNonTrouve 
+     */
+    private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) throws universitaireNonTrouve {//GEN-FIRST:event_bt_connexionActionPerformed
+    	if (IUniversiteImpl.identifier(this.tf_numEtu.getText(),this.tf_mdp.getText()))
+    	{
+    		if(IUniversiteImpl.identifier(tf_numEtu.getText(), tf_mdp.getText())){
+    			JOptionPane.showMessageDialog(this, "Bienvenue");
+    			this.setVisible(false);
+        		this.parent.setVisible(true);
+        		this.parent.setEnabled(true);
+    		}
+    		else{
+    			JOptionPane.showMessageDialog(this, "Erreur d'identification", "Erreur", JOptionPane.ERROR_MESSAGE);
+    		}
+    	}
+    }
 
     private void bt_quitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_quitterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_quitterActionPerformed
+      this.setVisible(false);
+      this.dispose();
+    }
 
     /**
      * @param args the command line arguments
@@ -147,7 +182,7 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConnexionUniversitaire().setVisible(true);
+            	new ConnexionUniversitaire(parent,universite).setVisible(true);
             }
         });
     }
@@ -156,7 +191,7 @@ public class ConnexionUniversitaire extends javax.swing.JFrame {
     private javax.swing.JButton bt_connexion;
     private javax.swing.JButton bt_quitter;
     private javax.swing.JLabel lb_mdp;
-    private javax.swing.JLabel lb_numEtu;
+    private javax.swing.JLabel lb_numUniv;
     private javax.swing.JLabel lb_titre;
     private javax.swing.JTextField tf_mdp;
     private javax.swing.JTextField tf_numEtu;

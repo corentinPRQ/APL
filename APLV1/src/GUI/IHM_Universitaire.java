@@ -6,17 +6,25 @@
 
 package GUI;
 
+import ClientsServeurs.ClientUniversiteGV;
+
 /**
  *
  * @author guilhem
  */
 public class IHM_Universitaire extends javax.swing.JFrame {
-
+	
+	public static ClientUniversiteGV clientUnivGV; 
     /**
      * Creates new form IHM_Universitaire
      */
-    public IHM_Universitaire() {
+    public IHM_Universitaire(ClientUniversiteGV client) {
         initComponents();
+        ConnexionUniversitaire cu = new ConnexionUniversitaire(this, client);
+        cu.setVisible(true);
+        this.setVisible(false);
+        IHM_Universitaire.clientUnivGV = client;
+        
     }
 
     /**
@@ -221,7 +229,7 @@ public class IHM_Universitaire extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IHM_Universitaire().setVisible(true);
+                new IHM_Universitaire(clientUnivGV).setVisible(true);
             }
         });
     }

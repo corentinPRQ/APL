@@ -29,7 +29,7 @@ public class ClientUniversiteGV implements Runnable{
 	private ArrayList<Voeu> listeDeVoeux;
 
 	public ClientUniversiteGV(ORB orb, NamingContext nameRoot, String nomObj,
-			String idObj, JFrame parent) {
+			String idObj) {
 		super();
 		this.orb = orb;
 		this.nameRoot = nameRoot;

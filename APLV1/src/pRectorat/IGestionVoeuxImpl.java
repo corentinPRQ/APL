@@ -134,8 +134,6 @@ public class IGestionVoeuxImpl extends IGestionVoeuxPOA {
 
 		boolean prerequisOK = false;
 		String dipV = v.acreditation.libelleD;
-		// appel à la méthode getPrérequis de université avec en param
-		// l'intitulé de la formation
 		Diplome[] pr = cu.getListePrerequis(dipV);
 		String formaEtu = "L3 Miage"; // TODO récupérer la formation du mec
 		for (int i = 0; i < pr.length; i++) {

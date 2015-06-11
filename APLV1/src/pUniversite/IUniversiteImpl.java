@@ -16,7 +16,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 
 	private Hashtable<String, Diplome[]> preRequis;
 	private Hashtable<String,Note[]> listeNotesEtudiants;
-	private Hashtable<String, String> listeUtilisateurs;
+	private static Hashtable<String, String> listeUniversitaires;
 
 	private ArrayList<Voeu> listePrincipale;
 	private ArrayList<Voeu> listeComplementaire;
@@ -24,7 +24,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 	private ArrayList<Voeu> listeCandidatures;
 
 
-	public IUniversiteImpl() {
+	public IUniversiteImpl(Hashtable<String, String> listeU) {
 		super();
 
 		//initialisation des listes 
@@ -40,18 +40,17 @@ public class IUniversiteImpl extends IUniversitePOA{
 		this.listeNotesEtudiants = new Hashtable<String, Note[]>();
 		initialiserNotesEtudiant("src/notes.csv");
 
-		this.listeUtilisateurs = new Hashtable<String, String>();
-		initialiserUsers("src/users.csv");
+		this.listeUniversitaires = listeU;
 	}
 
 
-	public boolean identifier(String login, String mdp) throws universitaireNonTrouve {
-		if (!listeUtilisateurs.contains(login)) {
+	public static boolean identifier(String login, String mdp) throws universitaireNonTrouve {
+		if (!listeUniversitaires.containsKey(login)) {
 			//mettre un code GUI pour notifier de l'erreur d'identification
 			throw new universitaireNonTrouve();
 		}
 		else {
-			if (listeUtilisateurs.get(login).equals(mdp)==false){
+			if (listeUniversitaires.get(login).equals(mdp)==false){
 				return false;
 			}
 		}
@@ -135,42 +134,6 @@ public class IUniversiteImpl extends IUniversitePOA{
 		else{
 			System.err.println("Valeur non trouvée");
 			return null;
-		}
-	}
-
-
-	private void initialiserUsers(String path){
-		String lineRead;
-		String[] lineSplit;
-		String login="";
-		String mdp="";
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(path));	 
-			lineRead = br.readLine();
-
-			while ((lineRead = br.readLine()) != null) {
-				lineSplit = lineRead.split(";",4);
-//				System.out.println("line split users : "+ lineSplit[0] + " - " + lineSplit[1] + " - " + lineSplit[2] + " - " +lineSplit[3]);
-				for (int i=0; i<lineSplit.length; i++){
-					switch(i){  
-					case 0: login = lineSplit[0];
-					break;
-					case 1: mdp = lineSplit[1];
-					break;
-					case 2 : 
-						break;
-					case 3 : 
-						break;
-					default : 
-						break;
-					}
-				}
-//				System.out.println("Login : "+login + " - mdp : "+mdp);
-				this.listeUtilisateurs.put(login, mdp);
-			}
-
-		}catch (Exception e){
-			e.printStackTrace();
 		}
 	}
 	
@@ -332,7 +295,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 	}
 
 	public static void main (String [] args){
-		IUniversiteImpl i = new IUniversiteImpl();
+		IUniversiteImpl i = new IUniversiteImpl(listeUniversitaires);
 		System.out.println(i.getListePrerequis("M1Miage"));
 			
 	}
