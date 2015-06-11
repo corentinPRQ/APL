@@ -9,6 +9,9 @@ package GUI;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import javax.swing.SwingUtilities;
+
+import pRectorat.Etudiant;
 import pRectorat.Voeu;
 import Applications.ApplicationGestionEtudiant;
 import ClientsServeurs.ClientEtudiantGV;
@@ -22,11 +25,20 @@ public class IHM_Etudiant extends javax.swing.JFrame {
 	private static ClientEtudiantGV clientEtuGV;
 
 
-	private ApplicationGestionEtudiant applicationGE;
-	private static ArrayList<Voeu> listeVoeux;
+	//private ApplicationGestionEtudiant applicationGE;
+	public Voeu[] listeVoeux;
 	private static Hashtable<String, String> listeEtudiants;
+	public Etudiant utilisateur;
 
-    /**
+    public javax.swing.JLabel getLb_nomEtud() {
+		return lb_nomEtud;
+	}
+
+	public void setLb_nomEtud(String nomEtud) {
+		this.lb_nomEtud.setText(nomEtud);
+	}
+
+	/**
      * Creates new form IHM_Etudiant
      */
 
@@ -207,6 +219,17 @@ public class IHM_Etudiant extends javax.swing.JFrame {
     private void bt_repondreVoeuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_repondreVoeuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_repondreVoeuActionPerformed
+    
+    @SuppressWarnings("unused") void remplirTableVoeu(final Voeu[] pVoeu){
+    	for(int i=0;i<pVoeu.length;i++){
+    		tab_VoeuxEtudiant.setValueAt(pVoeu[i].getIdV(),i, 0);
+    		tab_VoeuxEtudiant.setValueAt(pVoeu[i].getEtatVoeu().toString(),i, 1);
+    		tab_VoeuxEtudiant.setValueAt("nexiste pas dans le voeu",i, 2);
+    		tab_VoeuxEtudiant.setValueAt(pVoeu[i].getDecEtudiant(),i, 3);
+    	}
+    	//refres
+    	SwingUtilities.updateComponentTreeUI(this);
+    }
 
     /**
      * @param args the command line arguments

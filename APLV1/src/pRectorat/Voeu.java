@@ -37,7 +37,55 @@ public final class Voeu implements org.omg.CORBA.portable.IDLEntity
      */
     public pRectorat.Etat etatVoeu;
 
-    /**
+    public String getIdV() {
+		return idV;
+	}
+
+	public void setIdV(String idV) {
+		this.idV = idV;
+	}
+
+	public String getNoE() {
+		return noE;
+	}
+
+	public void setNoE(String noE) {
+		this.noE = noE;
+	}
+
+	public pRectorat.Accred getAcreditation() {
+		return acreditation;
+	}
+
+	public void setAcreditation(pRectorat.Accred acreditation) {
+		this.acreditation = acreditation;
+	}
+
+	public pRectorat.Rectorat getIdR() {
+		return idR;
+	}
+
+	public void setIdR(pRectorat.Rectorat idR) {
+		this.idR = idR;
+	}
+
+	public pRectorat.DecisionEtudiant getDecEtudiant() {
+		return decEtudiant;
+	}
+
+	public void setDecEtudiant(pRectorat.DecisionEtudiant decEtudiant) {
+		this.decEtudiant = decEtudiant;
+	}
+
+	public pRectorat.Etat getEtatVoeu() {
+		return etatVoeu;
+	}
+
+	public void setEtatVoeu(pRectorat.Etat etatVoeu) {
+		this.etatVoeu = etatVoeu;
+	}
+
+	/**
      * Default constructor
      */
     public Voeu()
