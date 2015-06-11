@@ -45,7 +45,7 @@ module pUniversite{
 	interface IUniversite{
 	
 		// Méthode pour récupérer les candidatures
-		readonly attribute ::pRectorat::Voeu getCandidatures; 
+		readonly attribute ::pRectorat::Voeu getCandidatures;
 		
 		// Opération qui permet de recupere les prerequis d'un diplome
 		listePrerequis getListePrerequis(in string dip);
