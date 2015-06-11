@@ -49,13 +49,13 @@ module pUniversite{
 		
 		// Opération qui permet de recupere les prerequis d'un diplome
 		listePrerequis getListePrerequis(in string dip);
-		
+
 		// Permet d'envoyer le changement d'etat d'une candidature
 		void enregistrerEtatCandidature(in ::pRectorat::Voeu c, in ::pRectorat::Etat e) raises (voeuNonTrouve);  
 		
 		// Permet de mettre à disposition les notes des étudiants inscrits dans l'université
 		listeNotes getNotes(in ::pRectorat::Etudiant idE) raises (::pRectorat::EtudiantNonTrouve);
-		
+
 	};
 };
 
