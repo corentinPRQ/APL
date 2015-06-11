@@ -41,34 +41,47 @@ public final class Etudiant implements org.omg.CORBA.portable.IDLEntity
         this.mdp = mdp;
     }
 
+	/**
+	 * @return the noEtu
+	 */
 	public String getNoEtu() {
 		return noEtu;
 	}
 
+	/**
+	 * @param noEtu the noEtu to set
+	 */
 	public void setNoEtu(String noEtu) {
 		this.noEtu = noEtu;
 	}
 
+	/**
+	 * @return the nom
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+	 * @param nom the nom to set
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	/**
+	 * @return the mdp
+	 */
 	public String getMdp() {
 		return mdp;
 	}
 
+	/**
+	 * @param mdp the mdp to set
+	 */
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
 
-	@Override
-	public String toString() {
-		return "Etudiant [noEtu=" + noEtu + ", nom=" + nom + ", mdp=" + mdp
-				+ "]";
-	}
-
+    
 }
