@@ -45,16 +45,13 @@ module pUniversite{
 	interface IUniversite{
 	
 		// Méthode pour récupérer les candidatures
-		//readonly attribute ::pRectorat::TabVoeux getCandidatures; 
+		readonly attribute ::pRectorat::Voeu getCandidatures;
 		
 		// Opération qui permet de recupere les prerequis d'un diplome
 		listePrerequis getListePrerequis(in string dip);
-	
-		//Opération d'identification de l universitaire
-		//boolean identifier(in string login, in string mdp) raises (universitaireNonTrouve);		
 		
 		// Permet d'envoyer le changement d'etat d'une candidature
-		//void enregistrerEtatCandidature(in ::pRectorat::Voeu c, in ::pRectorat::Etat e) raises (voeuNonTrouve);  
+		void enregistrerEtatCandidature(in ::pRectorat::Voeu c, in ::pRectorat::Etat e) raises (voeuNonTrouve);  
 		
 		// Permet de mettre à disposition les notes des étudiants inscrits dans l'université
 		listeNotes getNotes(in ::pRectorat::Etudiant idE) raises (::pRectorat::EtudiantNonTrouve);
