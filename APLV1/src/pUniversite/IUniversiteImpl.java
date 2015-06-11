@@ -16,7 +16,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 
 	private Hashtable<String, Diplome[]> preRequis;
 	private Hashtable<String,Note[]> listeNotesEtudiants;
-	private static Hashtable<String, String> listeUniversitaires;
+	private static Hashtable<String, String> listeUtilisateurs;
 
 	private ArrayList<Voeu> listePrincipale;
 	private ArrayList<Voeu> listeComplementaire;
@@ -24,7 +24,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 	private ArrayList<Voeu> listeCandidatures;
 
 
-	public IUniversiteImpl(Hashtable<String, String> listeU) {
+	public IUniversiteImpl() {
 		super();
 
 		//initialisation des listes 
@@ -40,38 +40,36 @@ public class IUniversiteImpl extends IUniversitePOA{
 		this.listeNotesEtudiants = new Hashtable<String, Note[]>();
 		initialiserNotesEtudiant("src/notes.csv");
 
-		this.listeUniversitaires = listeU;
+		this.listeUtilisateurs = new Hashtable<String, String>();
+		initialiserUsers("src/users.csv");
 	}
 
 
 	public static boolean identifier(String login, String mdp) throws universitaireNonTrouve {
-		if (!listeUniversitaires.containsKey(login)) {
+		if (!listeUtilisateurs.contains(login)) {
 			//mettre un code GUI pour notifier de l'erreur d'identification
 			throw new universitaireNonTrouve();
 		}
 		else {
-			if (listeUniversitaires.get(login).equals(mdp)==false){
+			if (listeUtilisateurs.get(login).equals(mdp)==false){
 				return false;
 			}
 		}
 		return true;
 	}
 
-	public Voeu getCandidatures() { //changer le type de retour -> tab VOeu
-		// méthode appelée par l'universitaire pour consulter les listes de voeux après décisions des étudiants
-		// appel à la méthode getVoeux de gestionVoeux
-		// Appel à la méthode majListe pour mettre à jour les listes en fonction des décisions des étudiants
-		// Retourne les listes mises à jour
+	@Override
+	public Voeu getCandidatures() { //Elle est appelée où et quand cette méthode ? A sortir de l'IDL à mon avis. WTF le return 1 voeu ?
+		//Chargement des voeux dans la liste des candidatures. --> dans ce cas c'est un appel à getVoeux de gestV
 		return null;
 	}
 
-	public void enregistrerEtatCandidature(Voeu c, Etat e) throws voeuNonTrouve {  //interne vu que appelée par l'universitaire
-		// Méthode appelée par l'universitaire quand il a mis à jour le voeu
-		// fait appel à setEtatVoeu de gestionVoeux
-		// appel à ajouter liste principale ou secondaire
+	@Override
+	public void enregistrerEtatCandidature(Voeu c, Etat e) throws voeuNonTrouve {
+		// Appel de setEtatVoeu dans Voeu normalement	
 	}
 
-	public void ajouterListePrincipale(Voeu c) throws voeuNonTrouve { // méthode appelée en interne donc à sortir de l'IDL
+	public void ajouterListePrincipale(Voeu c) throws voeuNonTrouve {
 		if (!listeCandidatures.contains(c)){
 			throw new voeuNonTrouve();
 		}
@@ -80,7 +78,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 		}
 	}
 
-	public void ajouterListeComplementaire(Voeu c) throws voeuNonTrouve { // méthode appelée en interne donc à sortir de l'IDL
+	public void ajouterListeComplementaire(Voeu c) throws voeuNonTrouve {
 		if (!listeCandidatures.contains(c)){
 			throw new voeuNonTrouve();
 		}
@@ -90,6 +88,10 @@ public class IUniversiteImpl extends IUniversitePOA{
 	}
 
 	public void majListes() { //TODO à sortir de l'IDL
+		/* 
+		 * Là par contre je sais pas quoi mettre ... 
+		 */
+		//potentiellement à faire dans gestionV
 		//changement de période. P3 me semble
 		//on recharge les voeux et on regarde les décisions de l'étudiant
 		//si il y a un OUI, on vire les autres candidatures
@@ -98,12 +100,14 @@ public class IUniversiteImpl extends IUniversitePOA{
 		//NON : on suppr sa candidature
 	}
 
-	public void enregistrerAnnuaire(String ior) { // sortir IDL
+
+	public void enregistrerAnnuaire(String ior) { // WTF ??? 
 		// TODO Auto-generated method stub
 
 	}
 
-	public void ajouterListeRejet(Voeu c) throws voeuNonTrouve { // intérêt d'avoir une liste refus ? pourquoi ne pas clore direct le voeu ? + interne
+
+	public void ajouterListeRejet(Voeu c) throws voeuNonTrouve { // intérêt d'avoir une liste refus ? pourquoi ne pas clore direct le voeu ?
 		if (!listeCandidatures.contains(c)){
 			throw new voeuNonTrouve();
 		}
@@ -113,7 +117,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 	}
 
 	@Override
-	public Note[] getNotes(Etudiant idE) throws EtudiantNonTrouve{ // pour exam candidatures pour une autre univ
+	public Note[] getNotes(Etudiant idE) throws EtudiantNonTrouve{
 		if (listeNotesEtudiants.contains(idE.noEtu)){
 			throw new EtudiantNonTrouve();
 		}
@@ -122,9 +126,6 @@ public class IUniversiteImpl extends IUniversitePOA{
 		}
 	}
 
-	/**
-	 * Renvoie les diplomes pré-requis pour postuler à un diplome
-	 */
 	@Override
 	public Diplome[] getListePrerequis(String diplome) {
 		System.out.println("Taille de la hashtable : " + preRequis.size());
@@ -136,11 +137,43 @@ public class IUniversiteImpl extends IUniversitePOA{
 			return null;
 		}
 	}
+
+
+	private void initialiserUsers(String path){
+		String lineRead;
+		String[] lineSplit;
+		String login="";
+		String mdp="";
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(path));	 
+			lineRead = br.readLine();
+
+			while ((lineRead = br.readLine()) != null) {
+				lineSplit = lineRead.split(";",4);
+//				System.out.println("line split users : "+ lineSplit[0] + " - " + lineSplit[1] + " - " + lineSplit[2] + " - " +lineSplit[3]);
+				for (int i=0; i<lineSplit.length; i++){
+					switch(i){  
+					case 0: login = lineSplit[0];
+					break;
+					case 1: mdp = lineSplit[1];
+					break;
+					case 2 : 
+						break;
+					case 3 : 
+						break;
+					default : 
+						break;
+					}
+				}
+//				System.out.println("Login : "+login + " - mdp : "+mdp);
+				this.listeUtilisateurs.put(login, mdp);
+			}
+
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 	
-	/**
-	 * Permet de charger les notes d'un étudiant
-	 * @param path
-	 */
 	private void initialiserNotesEtudiant(String path){
 		String lineRead;
 		String[] lineSplit;
@@ -201,10 +234,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 		
 	}
 	
-	/**
-	 * Permet de charger les formations pré-requis
-	 * @param path
-	 */
+	
 	private void initialiserPrerequis(String path) {
 		/*
 		 * Réfléchir à un moyen d'intégrer les notes pour les prérequis! 
@@ -295,7 +325,7 @@ public class IUniversiteImpl extends IUniversitePOA{
 	}
 
 	public static void main (String [] args){
-		IUniversiteImpl i = new IUniversiteImpl(listeUniversitaires);
+		IUniversiteImpl i = new IUniversiteImpl();
 		System.out.println(i.getListePrerequis("M1Miage"));
 			
 	}
