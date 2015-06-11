@@ -18,11 +18,6 @@ public final class Etudiant implements org.omg.CORBA.portable.IDLEntity
     public String nom;
 
     /**
-     * Struct member mdp
-     */
-    public String mdp;
-
-    /**
      * Default constructor
      */
     public Etudiant()
@@ -32,15 +27,14 @@ public final class Etudiant implements org.omg.CORBA.portable.IDLEntity
      * Constructor with fields initialization
      * @param noEtu noEtu struct member
      * @param nom nom struct member
-     * @param mdp mdp struct member
      */
-    public Etudiant(String noEtu, String nom, String mdp)
+    public Etudiant(String noEtu, String nom)
     {
         this.noEtu = noEtu;
         this.nom = nom;
-        this.mdp = mdp;
     }
 
+<<<<<<< HEAD
 	/**
 	 * @return the noEtu
 	 */
@@ -84,4 +78,6 @@ public final class Etudiant implements org.omg.CORBA.portable.IDLEntity
 	}
 
     
+=======
+>>>>>>> branch 'master' of https://github.com/corentinPRQ/APL.git
 }
